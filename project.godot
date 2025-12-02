@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="BreadHole"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="BreadHole"
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "red",
+"res://Assets/Audios/": "yellow",
+"res://Assets/Canvas/": "blue",
+"res://Assets/GUIs/": "green",
+"res://Codes/": "yellow",
+"res://Components/": "orange",
+"res://Configs/": "pink",
+"res://Objects/": "blue",
+"res://Rooms/": "purple",
+"res://Scripts/": "yellow",
+"res://Templates/": "gray",
+"res://Temps/": "gray",
+"res://Tests/": "gray"
+}
