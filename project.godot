@@ -37,7 +37,7 @@ folder_colors={
 "res://Objects/": "blue",
 "res://Rooms/": "purple",
 "res://Scripts/": "yellow",
-"res://Templates/": "gray",
+"res://Temporaries/": "gray",
 "res://Temps/": "gray",
 "res://Tests/": "gray"
 }
