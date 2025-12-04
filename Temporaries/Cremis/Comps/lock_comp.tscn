@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt6j445jwjq8u"]
+
+[ext_resource type="Script" uid="uid://cl0640q7ccvry" path="res://Temporaries/Cremis/Comps/LockComp.cs" id="1_ubtk0"]
+
+[node name="LockComp" type="Node"]
+script = ExtResource("1_ubtk0")

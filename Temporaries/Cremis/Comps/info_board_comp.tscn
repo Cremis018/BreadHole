@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chopfx3gn1ydn"]
+
+[ext_resource type="Script" uid="uid://dfjbhx4sfo3v6" path="res://Temporaries/Cremis/Comps/InfoBoardComp.cs" id="1_65f6l"]
+
+[node name="InfoBoardComp" type="Node"]
+script = ExtResource("1_65f6l")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cik6l4dnyhvn7"]
+
+[ext_resource type="Script" path="res://Temporaries/Cremis/Objects/Floor/Floor.cs" id="1_p5pge"]
+[ext_resource type="PackedScene" uid="uid://b33ddwr7su1r6" path="res://Temporaries/Cremis/Comps/floor_comp.tscn" id="2_4kugi"]
+[ext_resource type="Texture2D" uid="uid://ca34rxbcx0qjy" path="res://Temporaries/Cremis/Assets/spr_white.tres" id="3_fd8eh"]
+[ext_resource type="PackedScene" uid="uid://w11unek3cu7h" path="res://Temporaries/Cremis/Comps/map_composition_comp.tscn" id="4_jnwii"]
+
+[node name="Floor" type="Node2D" node_paths=PackedStringArray("C_MapComposition", "C_Floor", "N_Texture", "N_Carpet")]
+script = ExtResource("1_p5pge")
+C_MapComposition = NodePath("MapCompositionComp")
+C_Floor = NodePath("FloorComp")
+N_Texture = NodePath("Texture")
+N_Carpet = NodePath("Carpet")
+
+[node name="Texture" type="Sprite2D" parent="."]
+
+[node name="Carpet" type="Sprite2D" parent="."]
+
+[node name="FloorComp" parent="." instance=ExtResource("2_4kugi")]
+Texture = ExtResource("3_fd8eh")
+
+[node name="MapCompositionComp" parent="." instance=ExtResource("4_jnwii")]
