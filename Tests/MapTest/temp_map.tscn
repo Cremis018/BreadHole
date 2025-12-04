@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr8p5a01h3xqg"]
+
+[ext_resource type="PackedScene" uid="uid://cvudreka2hs7d" path="res://Temporaries/Cremis/GameObjects/player.tscn" id="1_6pgvf"]
+[ext_resource type="Script" uid="uid://dctrf2x6nu6l1" path="res://Tests/MapTest/TempMap.cs" id="1_y7n5e"]
+[ext_resource type="PackedScene" uid="uid://cik6l4dnyhvn7" path="res://Temporaries/Cremis/GameObjects/floor.tscn" id="2_y7n5e"]
+
+[node name="TempMap" type="Node2D" node_paths=PackedStringArray("_player")]
+script = ExtResource("1_y7n5e")
+_player = NodePath("Player")
+
+[node name="Floor" parent="." groups=["Floor"] instance=ExtResource("2_y7n5e")]
+modulate = Color(1, 0.53333336, 1, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_6pgvf")]
+position = Vector2(-27, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.96, 1.96)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://tsoswl3b0kq1"]
+
+[ext_resource type="Script" uid="uid://vuauqvsugqlo" path="res://Tests/EnitityTest/EnitityTest.cs" id="1_5sbhd"]
+[ext_resource type="Texture2D" uid="uid://bfghcxkrrbxwl" path="res://icon.svg" id="2_bqicq"]
+
+[node name="EnitityTest" type="Node" node_paths=PackedStringArray("_sprite")]
+script = ExtResource("1_5sbhd")
+_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bqicq")

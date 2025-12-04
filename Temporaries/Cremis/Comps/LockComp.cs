@@ -2,7 +2,7 @@ using Godot;
 using System;
 using GodotSimpleTools;
 
-public partial class LockComp : Node,IComponent
+public partial class LockComp : Component
 {
     [Notify(true),Export] public bool IsLocked { get => GetIsLocked(); set => SetIsLocked(value); }
     [Notify,Export] public int NeedsItemId { get => GetNeedsItemId(); set => SetNeedsItemId(value); }

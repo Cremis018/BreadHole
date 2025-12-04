@@ -1,36 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using Godot;
 
-//还不清楚要不要用
-public class Entity
+public class Entity(Node entityNode)
 {
-    private static ulong _nextId;
-
-    public ulong Id { get; }
-    private Dictionary<string, IComponent> _components { get; }
+    private Node EntityNode { get; } = entityNode;
     
-    public Entity()
-    {
-        Id = _nextId++;
-    }
+    private List<string> _components = [];
     
-    public void AddComponent(string name,IComponent component)
+    public void AddComponent(Component component,string name = null)
     {
-        _components.Add(name,component);
+        component.Name = string.IsNullOrWhiteSpace(name) 
+            ? component.GetType().ToString() 
+            : name;
+        _components.Add(component.Name);
+        EntityNode.AddChild(component);
     }
     
     public void RemoveComponent(string name)
     {
+        var component = EntityNode.GetNode(name);
+        EntityNode.RemoveChild(component);
+        component.QueueFree();
         _components.Remove(name);
     }
     
-    public T GetComponent<T>(string name) where T : class, IComponent
+    public T GetComponent<T>(string name = null) where T : Component
     {
-        return _components[name] as T;
+        if (string.IsNullOrWhiteSpace(name)) name = typeof(T).ToString();
+        return !HasComponent(name) 
+            ? throw new Exception($"Component {name} not found") 
+            : EntityNode.GetNode<T>(name);
     }
     
     public bool HasComponent(string name)
     {
-        return _components.ContainsKey(name);
+        return EntityNode.GetNodeOrNull(name) is not null;
+    }
+
+    public void ClearComponent()
+    {
+        foreach (var component in _components)
+        {
+            RemoveComponent(component);
+        }
     }
 }

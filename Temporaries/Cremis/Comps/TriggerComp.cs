@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TriggerComp : Node,IComponent
+public partial class TriggerComp : Component
 {
     public Action Event { get; set; }
     

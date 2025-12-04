@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cik6l4dnyhvn7"]
+
+[ext_resource type="Script" uid="uid://0lwt0o0kyypc" path="res://Temporaries/Cremis/GameObjects/Floor.cs" id="1_i5lpy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3h56"]
+size = Vector2(8, 8)
+
+[node name="Floor" type="Node2D"]
+script = ExtResource("1_i5lpy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_w3h56")

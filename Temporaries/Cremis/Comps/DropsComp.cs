@@ -2,7 +2,7 @@ using Godot;
 using System;
 using GodotSimpleTools;
 
-public partial class DropsComp : Node, IComponent
+public partial class DropsComp : Component
 {
     [Notify,Export] public int ItemId { get => GetItemId(); set => SetItemId(value); }
     

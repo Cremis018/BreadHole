@@ -2,7 +2,7 @@ using Godot;
 using System;
 using GodotSimpleTools;
 
-public partial class FloorComp : Node,IComponent
+public partial class FloorComp : Component
 {
     #region props
     [Notify,Export] public Texture2D Texture { get => GetTexture(); set => SetTexture(value); }
@@ -19,8 +19,16 @@ public partial class FloorComp : Node,IComponent
     
     #region life
     public override void _Ready()
-    { 
+    {
+        InitNodes();
         InitNotifies();
+        RenderUpdate();
+    }
+
+    private void InitNodes()
+    {
+        N_Texture ??= GetParent().GetNode<Sprite2D>("Sprite2D");
+        N_Carpet ??= GetParent().GetNode<Sprite2D>("Sprite2D2");
     }
     
     public override void _ExitTree()
@@ -30,6 +38,12 @@ public partial class FloorComp : Node,IComponent
     #endregion
     
     #region render
+    public void RenderUpdate()
+    {
+        RenderTexture(Texture);
+        RenderCarpet(Carpet);
+    }
+    
     [Receiver(nameof(TextureChanged))]
     public void RenderTexture(Texture2D texture)
     {
