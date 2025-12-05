@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreadHole", "BreadHole.csproj", "{8A809188-2985-411A-A75A-C7A05219BBEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreadHole", "BreadHole.csproj", "{28F782B0-9D98-4976-A5ED-4041BF866362}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8A809188-2985-411A-A75A-C7A05219BBEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A809188-2985-411A-A75A-C7A05219BBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A809188-2985-411A-A75A-C7A05219BBEF}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{8A809188-2985-411A-A75A-C7A05219BBEF}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{8A809188-2985-411A-A75A-C7A05219BBEF}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{8A809188-2985-411A-A75A-C7A05219BBEF}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{28F782B0-9D98-4976-A5ED-4041BF866362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F782B0-9D98-4976-A5ED-4041BF866362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F782B0-9D98-4976-A5ED-4041BF866362}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{28F782B0-9D98-4976-A5ED-4041BF866362}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{28F782B0-9D98-4976-A5ED-4041BF866362}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{28F782B0-9D98-4976-A5ED-4041BF866362}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

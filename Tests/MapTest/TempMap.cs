@@ -9,6 +9,8 @@ public partial class TempMap : Node2D
     {
         var mapWorld = new MapWorld(this);
         var absPath = ProjectSettings.GlobalizePath("res://Temporaries/Cremis/Levels/lvTest.txt");
-        mapWorld.GenerateMap(absPath);
+        mapWorld.Load(absPath);
+        
+        mapWorld.Save("user://map/lvTest.txt");
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Godot;
 
 public class MapWorld
@@ -20,19 +21,17 @@ public class MapWorld
     public Player Player { get; private set; }
     #endregion
 
-    #region gen
-    public void GenerateMap(string mapFilePath)
+    #region load
+    public void Load(string mapFilePath)
     {
         _floorMap.Clear();
         _junctionMap.Clear();
         _itemWhitelist.Clear();
-        if (string.IsNullOrWhiteSpace(mapFilePath)
-            || !File.Exists(mapFilePath))
+        if (!TextFileUtil.Exist(mapFilePath))
         {
             GD.PrintErr("地图文件不存在");
             return;
         }
-        
         string[] lines = File.ReadAllLines(mapFilePath);
         ParseMapData(lines);
     }
@@ -117,7 +116,8 @@ public class MapWorld
             junction.E.GetComponent<MarkableComp>()
                 .WasMarked = true;
         }
-            
+        
+        //TODO:对于被标记的衔接处是什么类型，还没有合适的读取方法和写入方法，需要日后设计
     }
 
     private List<Vector2I> FindJunctionHasNeighbor(Vector2I junctionPos)
@@ -180,9 +180,9 @@ public class MapWorld
             if (!line.StartsWith("player(") || !line.EndsWith(')')) continue;
             var rawStr = line.Substring(7, line.Length - 8);
             var pos = rawStr.Split(',');
-            return new Vector2I(int.Parse(pos[0]), int.Parse(pos[1]));
+            return new Vector2I(int.Parse(pos[0]), int.Parse(pos[1])) * 2 + Vector2I.One;
         }
-        return Vector2I.One;
+        return Vector2I.Zero;
     }
     
     private void CreatePlayer(Vector2I pos)
@@ -232,7 +232,82 @@ public class MapWorld
     
     private bool IdentifyMapYEnds(string line) => !string.IsNullOrEmpty(line) && line.StartsWith('#') && line.Distinct().Count() == 1;
     private bool IdentifyMapHEnds(string line) => line.StartsWith('#') && line.EndsWith('#');
+    #endregion
 
+    #region save
+    public void Save(string mapFilePath)
+    {
+        TextFileUtil.Write(mapFilePath, FormText());
+    }
+
+    private string FormText()
+    {
+        var sb = new StringBuilder();
+        sb.Append(FormMap());
+        sb.Append(FormPlayer());
+        sb.Append(FormItem());
+        return sb.ToString();
+    }
+
+    private string FormMap()
+    {
+        var floorsPos = _floorMap.Keys.ToList();
+        var xs = floorsPos.Select(p => p.X).ToArray();
+        var ys = floorsPos.Select(p => p.Y).ToArray();
+        
+        var minX = (xs.Min() - 1) / 2;
+        var maxX = (xs.Max() - 1) / 2;
+        var minY = (ys.Min() - 1) / 2;
+        var maxY = (ys.Max() - 1) / 2;
+        var width = maxX - minX + 1 + 2;
+        var height = maxY - minY + 1 + 2;
+
+        var map = new char[height, width];
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                map[y, x] = '#';
+        
+        var offset = new Vector2I(minX, minY);
+        foreach (var rawPos in floorsPos)
+        {
+            var pos = (rawPos - Vector2I.One) / 2 - offset + Vector2I.One;
+            var floorCh = _floorMap[rawPos].E.GetComponent<MarkableComp>().WasMarked
+                ? 'X'
+                : 'O';
+            map[pos.Y, pos.X] = floorCh;
+        }
+
+        var sb = new StringBuilder(height * (width + 1));
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++) sb.Append(map[y, x]); 
+            sb.Append('\n');
+        }
+        return sb.ToString();
+    }
+
+    //TODO:对于被标记的衔接处是什么类型，还没有合适的读取方法和写入方法，需要日后设计
+    private string FormJunction()
+    {
+        return string.Empty;
+    }
+
+    private string FormPlayer()
+    {
+        if (Player is null) return "player(0,0)";
+        var pos = Player.E.GetComponent<MapCompositionComp>().Coordinate;
+        pos = (pos - Vector2I.One) / 2;
+        return $"player({pos.X},{pos.Y})\n";
+    }
+
+    private string FormItem()
+    {
+        if (_itemWhitelist is null || _itemWhitelist.Count == 0) return "items[]\n";
+        return $"items[{_itemWhitelist.ToArray().Join(",")}]\n";
+    }
+    #endregion
+    
+    #region debug
     private void PrintLines(string[] lines)
     {
         foreach (var line in lines) GD.Print(line);
