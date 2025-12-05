@@ -3,15 +3,15 @@
 [ext_resource type="Script" uid="uid://cnm8i5nbwr86t" path="res://Temporaries/Cremis/GameObjects/Player.cs" id="1_k7il2"]
 [ext_resource type="Texture2D" uid="uid://bfghcxkrrbxwl" path="res://icon.svg" id="1_pkkgf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pkkgf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmm47"]
 atlas = ExtResource("1_pkkgf")
-region = Rect2(16, 80, 16, 16)
+region = Rect2(56, 64, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k7il2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pkkgf")
+"texture": SubResource("AtlasTexture_bmm47")
 }],
 "loop": true,
 "name": &"default",
@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7il2"]
-b = Vector2(16, 0)
+b = Vector2(8, 0)
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_k7il2")

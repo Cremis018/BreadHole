@@ -11,7 +11,8 @@ public partial class Player : Node2D
     {
         E ??= new(this);
         var detectorComp = Component.Create<DetectorComp>();
-        E.AddComponent(detectorComp);
+        var mapCompositionComp = Component.Create<MapCompositionComp>();
+        E.BatchAddComponent(detectorComp,mapCompositionComp);
     }
     #endregion
 
@@ -19,17 +20,14 @@ public partial class Player : Node2D
     public override void _Ready()
     {
         InitEntity();
-        E.GetComponent<DetectorComp>().DetectedGroupsChanged += Detect;
+        E.GetComponent<DetectorComp>().DetectedJunctionChanged += Detect;
     }
     #endregion
 
     #region respond
-    private void Detect(List<StringName> detectedGroups)
+    private void Detect(JunctionType junction)
     {
-        foreach (var detectedGroup in detectedGroups)
-        {
-            GD.Print(detectedGroup);
-        }
+        GD.Print(junction);
     }
     #endregion
 

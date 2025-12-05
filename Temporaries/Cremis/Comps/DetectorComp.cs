@@ -7,7 +7,7 @@ using GodotSimpleTools;
 public partial class DetectorComp : Component
 {
     #region prop
-    [Notify] public List<StringName> DetectedGroups { get => GetDetectedGroups(); set => SetDetectedGroups(value); }
+    [Notify] public JunctionType DetectedJunction { get => GetDetectedJunction(); set => SetDetectedJunction(value); }
     #endregion
 
     #region nodes
@@ -31,8 +31,10 @@ public partial class DetectorComp : Component
     #region op
     private void Detect(Area2D area)
     {
-        var node = area.Owner;
-        DetectedGroups = node.GetGroups().ToList();
+        var node = area.GetParent();
+        if (node is not Junction junction) return;
+        DetectedJunction = junction.E.GetComponent<JunctionComp>()
+            .JunctionType;
     }
     #endregion
 }

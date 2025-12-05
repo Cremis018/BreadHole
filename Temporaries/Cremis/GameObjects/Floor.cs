@@ -10,11 +10,11 @@ public partial class Floor : Node2D
     {
         E ??= new(this);
         var mapCompositionComp = Component.Create<MapCompositionComp>();
-        var floorComp = Component.Create<FloorComp>();
         var markableComp = Component.Create<MarkableComp>();
-        floorComp.Texture = ResourceLoader.Load<Texture2D>("uid://ca34rxbcx0qjy");
+        var floorComp = Component.Create<FloorComp>();
         mapCompositionComp.Coordinate = Vector2I.One;
-        E.BatchAddComponent(mapCompositionComp,floorComp,markableComp);
+        floorComp.Texture = ResourceLoader.Load<Texture2D>("uid://ca34rxbcx0qjy");
+        E.BatchAddComponent(mapCompositionComp,markableComp,floorComp);
     }
     #endregion
 

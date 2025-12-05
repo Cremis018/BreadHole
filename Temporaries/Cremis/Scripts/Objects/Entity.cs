@@ -13,8 +13,8 @@ public class Entity(Node entityNode)
         component.Name = string.IsNullOrWhiteSpace(name) 
             ? component.GetType().ToString() 
             : name;
-        _components.Add(component.Name);
         EntityNode.AddChild(component);
+        _components.Add(component.Name);
     }
 
     public void BatchAddComponent(params Component[] components)
@@ -24,7 +24,8 @@ public class Entity(Node entityNode)
     
     public void RemoveComponent(string name)
     {
-        var component = EntityNode.GetNode(name);
+        var component = EntityNode.GetNodeOrNull(name);
+        if (component is null) return;
         EntityNode.RemoveChild(component);
         component.QueueFree();
         _components.Remove(name);

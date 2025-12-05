@@ -14,6 +14,7 @@ public partial class FloorComp : Component
     [ExportGroup("Nodes")]
     [Export] public Sprite2D N_Texture { get; private set; }
     [Export] public Sprite2D N_Carpet { get; private set; }
+    [Export] public MarkableComp C_Markable { get; private set; }
     #endregion
     
     #region life
@@ -28,6 +29,7 @@ public partial class FloorComp : Component
     {
         N_Texture ??= GetParent().GetNode<Sprite2D>("Sprite2D");
         N_Carpet ??= GetParent().GetNode<Sprite2D>("Sprite2D2");
+        C_Markable ??= GetParent().GetNode<MarkableComp>("MarkableComp");
     }
     
     public override void _ExitTree()
@@ -55,6 +57,13 @@ public partial class FloorComp : Component
     {
         if (N_Carpet is null) return;
         N_Carpet.Texture = carpet;
+    }
+
+    [Receiver(nameof(C_Markable.WasMarkedChanged))]
+    public void RenderMark(bool wasMarked)
+    {
+        if (N_Texture is null) return;
+        N_Texture.SelfModulate = wasMarked ? Colors.Red : Colors.White;
     }
     #endregion
 }
