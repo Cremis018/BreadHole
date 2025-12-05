@@ -7,6 +7,8 @@ public partial class JunctionComp : Component
     #region props
     [Notify,Export] public bool IsHorizontal { get => GetIsHorizontal(); set => SetIsHorizontal(value); }
     [Notify,Export] public Texture2D Texture { get => GetTexture(); set => SetTexture(value); }
+    [Notify(true),Export] public bool CanPass { get => GetCanPass(); set => SetCanPass(value); }
+    [Notify("Air"),Export] public string JunctionType { get => GetJunctionType(); set => SetJunctionType(value); }
     #endregion
 
     #region nodes
@@ -25,10 +27,10 @@ public partial class JunctionComp : Component
 
     private void InitNodes()
     {
-        if (Owner is Node2D node2D)
+        if (GetParent() is Node2D node2D)
             N_Junction = node2D;
-        N_Texture ??= Owner.GetNode<Sprite2D>("Sprite2D");
-        N_MapComposition ??= Owner.GetNode<MapCompositionComp>("MapCompositionComp");
+        N_Texture ??= GetParent().GetNode<Sprite2D>("Sprite2D");
+        N_MapComposition ??= GetParent().GetNode<MapCompositionComp>("MapCompositionComp");
     }
     
     public override void _ExitTree()

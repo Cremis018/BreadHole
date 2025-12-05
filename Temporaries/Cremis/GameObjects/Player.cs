@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public partial class Player : Node2D
 {
     #region entity
-    private Entity e;
+    public Entity E { get; protected set; }
 
     private void InitEntity()
     {
-        e ??= new(this);
+        E ??= new(this);
         var detectorComp = Component.Create<DetectorComp>();
-        e.AddComponent(detectorComp);
+        E.AddComponent(detectorComp);
     }
     #endregion
 
@@ -19,7 +19,7 @@ public partial class Player : Node2D
     public override void _Ready()
     {
         InitEntity();
-        e.GetComponent<DetectorComp>().DetectedGroupsChanged += Detect;
+        E.GetComponent<DetectorComp>().DetectedGroupsChanged += Detect;
     }
     #endregion
 

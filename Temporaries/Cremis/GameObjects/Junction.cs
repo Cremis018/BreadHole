@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Floor : Node2D
+public partial class Junction : Node2D
 {
     #region entity
     public Entity E { get; protected set; }
@@ -10,11 +10,9 @@ public partial class Floor : Node2D
     {
         E ??= new(this);
         var mapCompositionComp = Component.Create<MapCompositionComp>();
-        var floorComp = Component.Create<FloorComp>();
+        var junctionComp = Component.Create<JunctionComp>();
         var markableComp = Component.Create<MarkableComp>();
-        floorComp.Texture = ResourceLoader.Load<Texture2D>("uid://ca34rxbcx0qjy");
-        mapCompositionComp.Coordinate = Vector2I.One;
-        E.BatchAddComponent(mapCompositionComp,floorComp,markableComp);
+        E.BatchAddComponent(mapCompositionComp,junctionComp,markableComp);
     }
     #endregion
 

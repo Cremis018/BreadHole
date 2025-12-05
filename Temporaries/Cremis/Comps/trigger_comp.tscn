@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxpxkenu1pg2x"]
-
-[ext_resource type="Script" uid="uid://b1dj6npabyqb5" path="res://Temporaries/Cremis/Comps/TriggerComp.cs" id="1_l6jay"]
-
-[node name="TriggerComp" type="Node"]
-script = ExtResource("1_l6jay")

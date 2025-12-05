@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds2nguyfnyjuc"]
+[gd_scene load_steps=4 format=3 uid="uid://ds2nguyfnyjuc"]
 
 [ext_resource type="Texture2D" uid="uid://ca34rxbcx0qjy" path="res://Temporaries/Cremis/Assets/spr_white.tres" id="1_3gkgn"]
-[ext_resource type="PackedScene" uid="uid://w11unek3cu7h" path="res://Temporaries/Cremis/Comps/map_composition_comp.tscn" id="2_nkfok"]
-[ext_resource type="PackedScene" uid="uid://bodcv4xkip0j7" path="res://Temporaries/Cremis/Comps/junction_comp.tscn" id="3_guxjm"]
+[ext_resource type="Script" uid="uid://c4vvuhobo8cp0" path="res://Temporaries/Cremis/GameObjects/Junction.cs" id="1_nkfok"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gkgn"]
 size = Vector2(2, 8)
 
 [node name="Junction" type="Node2D"]
+script = ExtResource("1_nkfok")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.2627451, 0.34117648, 1, 1)
 texture = ExtResource("1_3gkgn")
 region_enabled = true
 region_rect = Rect2(0, 0, 2, 16)
@@ -19,11 +20,3 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_3gkgn")
-
-[node name="MapCompositionComp" parent="." node_paths=PackedStringArray("N_Coordinate") instance=ExtResource("2_nkfok")]
-N_Coordinate = NodePath("..")
-
-[node name="JunctionComp" parent="." node_paths=PackedStringArray("N_Junction", "N_MapComposition", "N_Texture") instance=ExtResource("3_guxjm")]
-N_Junction = NodePath("..")
-N_MapComposition = NodePath("../MapCompositionComp")
-N_Texture = NodePath("../Sprite2D")

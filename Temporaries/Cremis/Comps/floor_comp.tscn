@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b33ddwr7su1r6"]
-
-[ext_resource type="Script" uid="uid://bqp2q2qm64wi2" path="res://Temporaries/Cremis/Comps/FloorComp.cs" id="1_psvyw"]
-
-[node name="FloorComp" type="Node"]
-script = ExtResource("1_psvyw")

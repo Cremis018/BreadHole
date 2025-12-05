@@ -7,7 +7,6 @@ public partial class FloorComp : Component
     #region props
     [Notify,Export] public Texture2D Texture { get => GetTexture(); set => SetTexture(value); }
     [Notify,Export] public Texture2D Carpet { get => GetCarpet(); set => SetCarpet(value); }
-    [Notify,Export] public bool WasMarked { get => GetWasMarked(); set => SetWasMarked(value); }
     [Notify(-1),Export] public int DropsItemId { get => GetDropsItemId(); set => SetDropsItemId(value); }
     #endregion
 

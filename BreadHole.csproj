@@ -10,4 +10,7 @@
   <ItemGroup>
     <PackageReference Include="GodotSimpleTools" Version="0.0.0.12" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Temporaries\Cremis\Levels\lvTest.txt" />
+  </ItemGroup>
 </Project>

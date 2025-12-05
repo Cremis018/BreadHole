@@ -16,6 +16,11 @@ public class Entity(Node entityNode)
         _components.Add(component.Name);
         EntityNode.AddChild(component);
     }
+
+    public void BatchAddComponent(params Component[] components)
+    {
+        foreach (var component in components) AddComponent(component);
+    }
     
     public void RemoveComponent(string name)
     {
@@ -23,6 +28,17 @@ public class Entity(Node entityNode)
         EntityNode.RemoveChild(component);
         component.QueueFree();
         _components.Remove(name);
+    }
+    
+    public void RemoveComponent<T>(string name = null) where T : Component
+    {
+        if (string.IsNullOrWhiteSpace(name)) name = typeof(T).ToString();
+        RemoveComponent(name);
+    }
+
+    public void BatchRemoveComponent(params string[] names)
+    {
+        foreach (var name in names) RemoveComponent(name);
     }
     
     public T GetComponent<T>(string name = null) where T : Component

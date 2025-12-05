@@ -4,10 +4,11 @@ using System;
 public partial class TempMap : Node2D
 {
     [Export] private Player _player;
-    
-    public override void _Input(InputEvent @event)
+
+    public override void _Ready()
     {
-        if (@event.IsActionPressed("ui_right"))
-            _player.QueueFree();
+        var mapWorld = new MapWorld(this);
+        var absPath = ProjectSettings.GlobalizePath("res://Temporaries/Cremis/Levels/lvTest.txt");
+        mapWorld.GenerateMap(absPath);
     }
 }

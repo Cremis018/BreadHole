@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 
-public class ComponentsPaths
+public class ComponentPaths
 {
     private static Dictionary<Type, string> Components = new()
     {
@@ -17,6 +17,7 @@ public class ComponentsPaths
         {typeof(FluoroscopyComp),"uid://dpt2epjoflptm" },
         {typeof(FloorComp),"uid://bqp2q2qm64wi2" },
         {typeof(DropsComp),"uid://cwp2h8p0sjo1q" },
+        {typeof(MarkableComp),"uid://bquc7lp3lkyfc" },
         {typeof(TestComp),"uid://ja3ld4lfxmsi"}
     };
     

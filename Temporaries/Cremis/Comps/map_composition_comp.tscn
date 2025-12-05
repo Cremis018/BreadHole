@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://w11unek3cu7h"]
-
-[ext_resource type="Script" path="res://Temporaries/Cremis/Comps/MapCompositionComp.cs" id="1_hn0oh"]
-
-[node name="MapCompositionComp" type="Node"]
-script = ExtResource("1_hn0oh")

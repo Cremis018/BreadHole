@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq7vuu7hf4g1c"]
-
-[ext_resource type="Script" uid="uid://dcvkhv7t3emgf" path="res://Temporaries/Cremis/Comps/HoldingsComp.cs" id="1_sceh1"]
-
-[node name="HoldingsComp" type="Node"]
-script = ExtResource("1_sceh1")

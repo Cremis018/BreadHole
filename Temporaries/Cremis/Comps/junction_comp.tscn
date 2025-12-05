@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bodcv4xkip0j7"]
-
-[ext_resource type="Script" uid="uid://dtju680mmbbpg" path="res://Temporaries/Cremis/Comps/JunctionComp.cs" id="1_klcc1"]
-
-[node name="JunctionComp" type="Node"]
-script = ExtResource("1_klcc1")
