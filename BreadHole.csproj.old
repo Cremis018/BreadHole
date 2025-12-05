@@ -5,12 +5,6 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Temporaries\Cremis\GameObjects\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="GodotSimpleTools" Version="0.0.0.12" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Temporaries\Cremis\Levels\lvTest.txt" />
+    <PackageReference Include="GodotSimpleTools" Version="0.0.0.2" />
   </ItemGroup>
 </Project>
