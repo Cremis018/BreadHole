@@ -7,7 +7,7 @@ using GodotSimpleTools;
 public partial class DetectorComp : Component
 {
     #region prop
-    [Notify] public JunctionType DetectedJunction { get => GetDetectedJunction(); set => SetDetectedJunction(value); }
+    [Notify] public int[] DetectedFeatures { get => GetDetectedFeatures(); set => SetDetectedFeatures(value); }
     #endregion
 
     #region nodes
@@ -33,8 +33,8 @@ public partial class DetectorComp : Component
     {
         var node = area.GetParent();
         if (node is not Junction junction) return;
-        DetectedJunction = junction.E.GetComponent<JunctionComp>()
-            .JunctionType;
+        DetectedFeatures = junction.E.GetComponent<JunctionComp>()
+            .Features;
     }
     #endregion
 }

@@ -18,6 +18,7 @@ public class ComponentPaths
         {typeof(FloorComp),"uid://bqp2q2qm64wi2" },
         {typeof(DropsComp),"uid://cwp2h8p0sjo1q" },
         {typeof(MarkableComp),"uid://bquc7lp3lkyfc" },
+        {typeof(PocketComp),"uid://crtbqbjty0hmh" },
         {typeof(TestComp),"uid://ja3ld4lfxmsi"}
     };
     

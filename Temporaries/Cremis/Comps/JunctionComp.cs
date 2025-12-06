@@ -8,7 +8,7 @@ public partial class JunctionComp : Component
     [Notify,Export] public bool IsHorizontal { get => GetIsHorizontal(); set => SetIsHorizontal(value); }
     [Notify,Export] public Texture2D Texture { get => GetTexture(); set => SetTexture(value); }
     [Notify(true),Export] public bool CanPass { get => GetCanPass(); set => SetCanPass(value); }
-    [Notify(JunctionType.Air),Export] public JunctionType JunctionType { get => GetJunctionType(); set => SetJunctionType(value); }
+    [Notify,Export] public int[] Features { get => GetFeatures(); set => SetFeatures(value); }
     #endregion
 
     #region nodes
@@ -68,14 +68,10 @@ public partial class JunctionComp : Component
         N_Texture.Texture = texture;
     }
 
-    [Receiver(nameof(JunctionTypeChanged))]
-    private void RenderType(JunctionType type)
+    [Receiver(nameof(FeaturesChanged))]
+    private void RenderFeatures(int[] feats)
     {
-        N_Texture.SelfModulate = type switch
-        {
-            JunctionType.Wall => Colors.Black,
-            _ => Colors.Pink
-        };
+        
     }
     #endregion
 }

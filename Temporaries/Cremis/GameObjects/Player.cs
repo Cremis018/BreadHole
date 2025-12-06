@@ -12,7 +12,8 @@ public partial class Player : Node2D
         E ??= new(this);
         var detectorComp = Component.Create<DetectorComp>();
         var mapCompositionComp = Component.Create<MapCompositionComp>();
-        E.BatchAddComponent(detectorComp,mapCompositionComp);
+        var pocketComp = Component.Create<PocketComp>();
+        E.BatchAddComponent(detectorComp,mapCompositionComp,pocketComp);
     }
     #endregion
 
@@ -20,14 +21,19 @@ public partial class Player : Node2D
     public override void _Ready()
     {
         InitEntity();
-        E.GetComponent<DetectorComp>().DetectedJunctionChanged += Detect;
+        E.GetComponent<DetectorComp>().DetectedFeaturesChanged += Detect;
+    }
+    
+    public override void _ExitTree()
+    {
+        E.GetComponent<DetectorComp>().DetectedFeaturesChanged -= Detect;
     }
     #endregion
 
     #region respond
-    private void Detect(JunctionType junction)
+    private void Detect(int[] feats)
     {
-        GD.Print(junction);
+        GD.Print($"探测到特性为[{feats.Join(",")}]的衔接处");
     }
     #endregion
 
