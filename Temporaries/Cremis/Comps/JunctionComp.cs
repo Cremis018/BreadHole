@@ -8,6 +8,7 @@ public partial class JunctionComp : Component
     [Notify,Export] public bool IsHorizontal { get => GetIsHorizontal(); set => SetIsHorizontal(value); }
     [Notify,Export] public Texture2D Texture { get => GetTexture(); set => SetTexture(value); }
     [Notify(true),Export] public bool CanPass { get => GetCanPass(); set => SetCanPass(value); }
+    //HACK:这个属性会单独成为一个组件，当地图生成完全重构后，再删除这个属性
     [Notify,Export] public int[] Features { get => GetFeatures(); set => SetFeatures(value); }
     #endregion
 
@@ -66,12 +67,6 @@ public partial class JunctionComp : Component
     private void RenderTexture(Texture2D texture)
     {
         N_Texture.Texture = texture;
-    }
-
-    [Receiver(nameof(FeaturesChanged))]
-    private void RenderFeatures(int[] feats)
-    {
-        
     }
     #endregion
 }

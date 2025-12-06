@@ -10,16 +10,56 @@ public class Entity(Node entityNode)
     
     public void AddComponent(Component component,string name = null)
     {
-        component.Name = string.IsNullOrWhiteSpace(name) 
-            ? component.GetType().ToString() 
-            : name;
+        name = GetCompName(component,name);
+        component.Name = name;
         EntityNode.AddChild(component);
-        _components.Add(component.Name);
+        _components.Add(name);
+    }
+    
+    public void AddComponentIfNone(string oldName, Component component, string name = null)
+    {
+        if (!HasComponent(oldName))
+            AddComponent(component,name);
+    }
+    
+    public T AddComponentIfNone<T>(T component = null,string name = null) where T : Component
+    {
+        if (!HasComponent<T>()) return GetComponent<T>();
+        component ??= Component.Create<T>();
+        AddComponent(component,name);
+        return GetComponent<T>();
     }
 
     public void BatchAddComponent(params Component[] components)
     {
         foreach (var component in components) AddComponent(component);
+    }
+
+    public void ReplaceComponent(Component component, string name = null)
+    {
+        name = GetCompName(component,name);
+        component.Name = name;
+        if (!HasComponent(name))
+        {
+            AddComponent(component);
+            return;
+        }
+        RemoveComponent(name);
+        AddComponent(component);
+    }
+    
+    public void ReplaceComponent<T>(string name = null) where T : Component
+    {
+        name = GetCompName<T>(name);
+        var component = Component.Create<T>();
+        component.Name = name;
+        if (!HasComponent<T>())
+        {
+            AddComponent(component);
+            return;
+        }
+        RemoveComponent<T>();
+        AddComponent(component);
     }
     
     public void RemoveComponent(string name)
@@ -54,6 +94,11 @@ public class Entity(Node entityNode)
     {
         return EntityNode.GetNodeOrNull(name) is not null;
     }
+    
+    public bool HasComponent<T>(string name = null) where T : Component
+    {
+        return HasComponent(typeof(T).ToString());
+    }
 
     public void ClearComponent()
     {
@@ -62,4 +107,16 @@ public class Entity(Node entityNode)
             RemoveComponent(component);
         }
     }
+
+    private string GetCompName(Component component, string name = null)
+    {
+        return string.IsNullOrWhiteSpace(name) 
+            ? component.GetType().ToString() 
+            : name;
+    }
+    
+    private string GetCompName<T>(string name = null) where T : Component =>
+        string.IsNullOrWhiteSpace(name)
+            ? typeof(T).ToString()
+            : name;
 }

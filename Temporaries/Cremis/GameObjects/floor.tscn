@@ -10,8 +10,6 @@ script = ExtResource("1_i5lpy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-
 [node name="Area2D" type="Area2D" parent="."]
 monitoring = false
 
