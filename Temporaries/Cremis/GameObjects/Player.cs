@@ -2,12 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Player : Node2D
+public partial class Player : Node2D,IEntity
 {
     #region entity
     public Entity E { get; protected set; }
 
-    private void InitEntity()
+    public void InitEntity()
     {
         E ??= new(this);
         var detectorComp = Component.Create<DetectorComp>();

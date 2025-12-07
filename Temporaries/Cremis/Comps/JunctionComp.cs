@@ -30,7 +30,7 @@ public partial class JunctionComp : Component
     {
         if (GetParent() is Node2D node2D)
             N_Junction = node2D;
-        N_Texture ??= GetParent().GetNode<Sprite2D>("Sprite2D");
+        N_Texture ??= GetParent().GetNode<Sprite2D>("Texture");
         N_MapComposition ??= GetParent().GetNode<MapCompositionComp>("MapCompositionComp");
     }
     

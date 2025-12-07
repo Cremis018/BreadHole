@@ -1,18 +1,19 @@
 using Godot;
 using System;
 
-public partial class Junction : Node2D
+public partial class Junction : Node2D,IEntity
 {
     #region entity
     public Entity E { get; protected set; }
 
-    private void InitEntity()
+    public void InitEntity()
     {
         E ??= new(this);
         var mapCompositionComp = Component.Create<MapCompositionComp>();
         var junctionComp = Component.Create<JunctionComp>();
         var markableComp = Component.Create<MarkableComp>();
-        E.BatchAddComponent(mapCompositionComp,junctionComp,markableComp);
+        var featureComp = Component.Create<FeatureComp>();
+        E.BatchAddComponent(mapCompositionComp,junctionComp,markableComp,featureComp);
     }
     #endregion
 

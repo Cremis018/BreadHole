@@ -25,7 +25,7 @@ public partial class FloorComp : Component
 
     private void InitNodes()
     {
-        N_Texture ??= GetParent().GetNode<Sprite2D>("Sprite2D");
+        N_Texture ??= GetParent().GetNode<Sprite2D>("Texture");
         C_Markable ??= GetParent().GetNode<MarkableComp>("MarkableComp");
     }
     

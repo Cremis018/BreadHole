@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
-public class Entity(Node entityNode)
+public class Entity(Node node)
 {
-    private Node EntityNode { get; } = entityNode;
+    private Node Node { get; } = node;
     
     private List<string> _components = [];
     
@@ -12,7 +13,7 @@ public class Entity(Node entityNode)
     {
         name = GetCompName(component,name);
         component.Name = name;
-        EntityNode.AddChild(component);
+        Node.AddChild(component);
         _components.Add(name);
     }
     
@@ -24,7 +25,7 @@ public class Entity(Node entityNode)
     
     public T AddComponentIfNone<T>(T component = null,string name = null) where T : Component
     {
-        if (!HasComponent<T>()) return GetComponent<T>();
+        if (HasComponent<T>()) return GetComponent<T>();
         component ??= Component.Create<T>();
         AddComponent(component,name);
         return GetComponent<T>();
@@ -62,12 +63,12 @@ public class Entity(Node entityNode)
         AddComponent(component);
     }
     
-    public void RemoveComponent(string name)
+    public void RemoveComponent(string name, bool free = true)
     {
-        var component = EntityNode.GetNodeOrNull(name);
+        var component = Node.GetNodeOrNull(name);
         if (component is null) return;
-        EntityNode.RemoveChild(component);
-        component.QueueFree();
+        Node.RemoveChild(component);
+        if (free) component.QueueFree();
         _components.Remove(name);
     }
     
@@ -87,12 +88,12 @@ public class Entity(Node entityNode)
         if (string.IsNullOrWhiteSpace(name)) name = typeof(T).ToString();
         return !HasComponent(name) 
             ? throw new Exception($"Component {name} not found") 
-            : EntityNode.GetNode<T>(name);
+            : Node.GetNode<T>(name);
     }
     
     public bool HasComponent(string name)
     {
-        return EntityNode.GetNodeOrNull(name) is not null;
+        return Node.GetNodeOrNull(name) is not null;
     }
     
     public bool HasComponent<T>(string name = null) where T : Component
@@ -100,11 +101,35 @@ public class Entity(Node entityNode)
         return HasComponent(typeof(T).ToString());
     }
 
-    public void ClearComponent()
+    public void ClearComponent(bool free = true)
     {
-        foreach (var component in _components)
+        var length = _components.Count;
+        for (int i = 0; i < length; i++)
         {
-            RemoveComponent(component);
+            var component = _components.LastOrDefault();
+            RemoveComponent(component,free);
+        }
+    }
+
+    public void ClearComponentWithBlacklist(string[] blackList, bool free = true)
+    {
+        var length = _components.Count;
+        for (int i = 0; i < length; i++)
+        {
+            var compName = _components.LastOrDefault();
+            if (blackList.Contains(compName)) continue;
+            RemoveComponent(compName,free);
+        }
+    }
+
+    public void ClearComponentWithBlacklist(Component[] blackList, bool free = true)
+    {
+        var length = _components.Count;
+        for (int i = 0; i < length; i++)
+        {
+            var compName = _components.LastOrDefault();
+            if (blackList.Any(x => x.Name == compName)) continue;
+            RemoveComponent(compName,free);
         }
     }
 
@@ -119,4 +144,10 @@ public class Entity(Node entityNode)
         string.IsNullOrWhiteSpace(name)
             ? typeof(T).ToString()
             : name;
+}
+
+public interface IEntity
+{
+    Entity E { get; }
+    void InitEntity();
 }
