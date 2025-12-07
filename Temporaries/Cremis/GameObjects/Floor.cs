@@ -12,8 +12,7 @@ public partial class Floor : Node2D,IEntity
         var mapCompositionComp = Component.Create<MapCompositionComp>();
         var markableComp = Component.Create<MarkableComp>();
         var floorComp = Component.Create<FloorComp>();
-        var featureComp = Component.Create<FeatureComp>();
-        E.BatchAddComponent(mapCompositionComp,markableComp,floorComp,featureComp);
+        E.BatchAddComponent(mapCompositionComp,markableComp,floorComp);
     }
     #endregion
 

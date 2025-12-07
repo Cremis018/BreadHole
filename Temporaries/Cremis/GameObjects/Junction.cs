@@ -12,8 +12,7 @@ public partial class Junction : Node2D,IEntity
         var mapCompositionComp = Component.Create<MapCompositionComp>();
         var junctionComp = Component.Create<JunctionComp>();
         var markableComp = Component.Create<MarkableComp>();
-        var featureComp = Component.Create<FeatureComp>();
-        E.BatchAddComponent(mapCompositionComp,junctionComp,markableComp,featureComp);
+        E.BatchAddComponent(mapCompositionComp,junctionComp,markableComp);
     }
     #endregion
 

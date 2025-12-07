@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbc8m84j0f28o"]
 
 [ext_resource type="Script" uid="uid://c3g2bn5ve2t2f" path="res://Tests/EnitityTest/FeaturesTest.cs" id="1_o1ool"]
-[ext_resource type="PackedScene" uid="uid://cik6l4dnyhvn7" path="res://Temporaries/Cremis/GameObjects/floor.tscn" id="2_o1ool"]
+[ext_resource type="PackedScene" uid="uid://bq8tgnmu1b8o1" path="res://Temporaries/Cremis/GlueObjects/timer_trigger_manager.tscn" id="2_o1ool"]
 
-[node name="TestRoom" type="Node" node_paths=PackedStringArray("_floor")]
+[node name="TestRoom" type="Node" node_paths=PackedStringArray("_timerTriggerManager")]
 script = ExtResource("1_o1ool")
-_floor = NodePath("Floor")
+_timerTriggerManager = NodePath("TimerTriggerManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.56, 2.56)
 
-[node name="Floor" parent="." instance=ExtResource("2_o1ool")]
+[node name="TimerTriggerManager" parent="." instance=ExtResource("2_o1ool")]

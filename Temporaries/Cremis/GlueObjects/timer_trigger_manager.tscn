@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq8tgnmu1b8o1"]
+
+[ext_resource type="Script" uid="uid://pk2va4uufro4" path="res://Temporaries/Cremis/GlueObjects/TimerTriggerManager.cs" id="1_kykdt"]
+
+[node name="TimerTriggerManager" type="Node" node_paths=PackedStringArray("_timer")]
+script = ExtResource("1_kykdt")
+_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
