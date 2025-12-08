@@ -74,6 +74,7 @@ public partial class TimerTriggerManager : Node
     public void Next()
     {
         _timer.WaitTime = CurrentWaitingTime;
+        GD.Print($"计时器：当前要等待{CurrentWaitingTime}");
         _timer.Start();
     }
     

@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
 public partial class Player : Node2D,IEntity
 {
@@ -31,9 +29,9 @@ public partial class Player : Node2D,IEntity
     #endregion
 
     #region respond
-    private void Detect(int[] feats)
+    private void Detect(string[] feats)
     {
-        GD.Print($"探测到特性为[{feats.Join(",")}]的衔接处");
+        GD.Print($"探测到特性为[{feats.Join("|")}]的衔接处");
     }
     #endregion
 

@@ -1,13 +1,10 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GodotSimpleTools;
 
 public partial class DetectorComp : Component
 {
     #region prop
-    [Notify] public int[] DetectedFeatures { get => GetDetectedFeatures(); set => SetDetectedFeatures(value); }
+    [Notify] public string[] DetectedFeatures { get => GetDetectedFeatures(); set => SetDetectedFeatures(value); }
     #endregion
 
     #region nodes
@@ -33,7 +30,7 @@ public partial class DetectorComp : Component
     {
         var node = area.GetParent();
         if (node is not Junction junction) return;
-        DetectedFeatures = junction.E.GetComponent<JunctionComp>()
+        DetectedFeatures = junction.E.GetComponent<FeatureComp>()
             .Features;
     }
     #endregion

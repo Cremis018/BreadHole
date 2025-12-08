@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://2gpffpl0m3hg"]
+
+[ext_resource type="Script" uid="uid://bvqqeg4yh1adi" path="res://Temporaries/Cremis/GameObjects/DialogBox.cs" id="1_pdk1e"]
+[ext_resource type="Texture2D" uid="uid://ce0eblnknaeof" path="res://Assets/GUIs/Textures/txr_dialog_box.tres" id="1_uv1sy"]
+[ext_resource type="FontFile" uid="uid://o5qsooevvw10" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_1.6.ttf" id="2_487sy"]
+[ext_resource type="FontFile" uid="uid://b513meunl51fh" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_Bold_1.6.ttf" id="3_v7r0w"]
+[ext_resource type="FontFile" uid="uid://5lgkanhnc87s" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_3D.ttf" id="4_pdk1e"]
+[ext_resource type="FontFile" uid="uid://xc46k7kyhnb" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_Gradient.ttf" id="5_wd4ct"]
+
+[node name="DialogBox" type="Control" node_paths=PackedStringArray("N_Label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pdk1e")
+N_Label = NodePath("PanelContainer/MarginContainer/RichTextLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -41.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_uv1sy")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_487sy")
+theme_override_fonts/bold_font = ExtResource("3_v7r0w")
+theme_override_fonts/bold_italics_font = ExtResource("4_pdk1e")
+theme_override_fonts/italics_font = ExtResource("5_wd4ct")
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

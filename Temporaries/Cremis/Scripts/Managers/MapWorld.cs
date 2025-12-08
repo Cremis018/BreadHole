@@ -122,7 +122,7 @@ public class MapWorld
     //             .WasMarked = true;
     //     }
     //     
-    //     //TODO:对于被标记的衔接处是什么类型，还没有合适的读取方法和写入方法，需要日后设计
+    //     
     // }
     //
     // private List<Vector2I> FindJunctionHasNeighbor(Vector2I junctionPos)

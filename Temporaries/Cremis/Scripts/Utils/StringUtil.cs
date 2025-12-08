@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 public static class StringUtil
 {
@@ -140,4 +141,60 @@ public static class StringUtil
     /// 判断字符是否为“单词字符”（字母、数字、下划线），用于严格边界判定。
     /// </summary>
     private static bool IsWordChar(char c) => char.IsLetterOrDigit(c) || c == '_';
+
+    /// <summary>
+    /// 返回一个新字符串，移除所有被指定单字符左右括号及其内部内容（不含括号本身）。
+    /// 支持嵌套与并列，例如："(a(b)c)" -> "ac"。
+    /// </summary>
+    public static string WithoutBracketContent(this string str, char left, char right)
+    {
+        if (string.IsNullOrEmpty(str)) return string.Empty;
+
+        var sb = new StringBuilder(str.Length);
+        int depth = 0;
+        foreach (char c in str)
+        {
+            if (c == left) { depth++; continue; }
+            if (c == right) { if (depth > 0) depth--; continue; }
+            if (depth == 0) sb.Append(c);
+        }
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 返回一个新字符串，移除所有被指定字符串左右括号及其内部内容（不含括号本身）。
+    /// 支持嵌套与并列，例如："【a【b】c】" -> "ac"。
+    /// </summary>
+    public static string WithoutBracketContent(this string str, string left, string right, StringComparison comparison = StringComparison.Ordinal)
+    {
+        if (string.IsNullOrEmpty(str) || string.IsNullOrEmpty(left) || string.IsNullOrEmpty(right))
+            return str ?? string.Empty;
+
+        var sb = new StringBuilder(str.Length);
+        int depth = 0;
+        int i = 0;
+        while (i <= str.Length - left.Length)
+        {
+            if (str.AsSpan(i, left.Length).Equals(left.AsSpan(), comparison))
+            {
+                depth++;
+                i += left.Length;
+                continue;
+            }
+
+            if (depth > 0 && i <= str.Length - right.Length &&
+                str.AsSpan(i, right.Length).Equals(right.AsSpan(), comparison))
+            {
+                depth--;
+                i += right.Length;
+                continue;
+            }
+
+            if (depth == 0) sb.Append(str[i]);
+            i++;
+        }
+
+        // 剩余字符（右括号多、不成对的情况）直接跳过
+        return sb.ToString();
+    }
 }

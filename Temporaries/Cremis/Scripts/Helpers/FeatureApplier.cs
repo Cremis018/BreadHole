@@ -52,7 +52,7 @@ public static class FeatureApplier
     {
         var found = feature.IndexOf('{');
         if (found < 0) return (feature,[]);
-        var args = feature.SubstringWithBracket("{", "}").Split(",");
+        var args = feature.SubstringWithBracket("{", "}").Split('|');
         var feat = feature[..found];
         return (feat,args);
     }
@@ -135,7 +135,7 @@ public static class FeatureApplier
     private static void HandleTextFeat(IEntity entity, string[] args)
     {
         if (args.Length < 1) return;
-        var text = args.Join(",");
+        var text = args.Join("|");
         var comp = entity.E.AddComponentIfNone<InfoBoardComp>();
         comp.InfoText = text;
     }

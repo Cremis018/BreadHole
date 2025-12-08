@@ -8,11 +8,11 @@ public partial class HoldingsComp : Component
 
     public void Use()
     {
-        //TODO：使用物品后执行物品对应的逻辑，然后销毁物品
+        Game.Instance.Pocket.Use(ItemId);
     }
 
     public void Drop()
     {
-        //TODO：丢弃物品后执行物品对应的逻辑，然后销毁物品
+        Game.Instance.Pocket.Drop(ItemId);
     }
 }

@@ -2,8 +2,8 @@
 #OOO#O#
 #OXOO##
 #######
-player(0,0)[1,2]
-items[1,2,3]
-@(2,1)[gate]
-$Enter(2,1)[]
-$Timer(3000)[tp{1,2}]
+player(0|0)[1|2]
+items[1|2|3]
+@(2|1)[gate]
+$Enter(2|1)[]
+$Timer(3000)[tp{1|2}]
