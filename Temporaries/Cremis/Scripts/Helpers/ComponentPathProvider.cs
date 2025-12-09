@@ -1,4 +1,4 @@
-﻿public static class ComponentPath
+﻿public static class ComponentPathProvider
 {
     private const string _rootPath = "res://Temporaries/Cremis/Comps/";
     

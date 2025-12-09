@@ -19,19 +19,30 @@ public partial class Player : Node2D,IEntity
     public override void _Ready()
     {
         InitEntity();
-        E.GetComponent<DetectorComp>().DetectedFeaturesChanged += Detect;
+        E.GetComponent<DetectorComp>().EnterEntityChanged += DetectEnter;
+        E.GetComponent<DetectorComp>().ExitEntityChanged += DetectExit;
     }
     
     public override void _ExitTree()
     {
-        E.GetComponent<DetectorComp>().DetectedFeaturesChanged -= Detect;
+        E.GetComponent<DetectorComp>().EnterEntityChanged -= DetectEnter;
+        E.GetComponent<DetectorComp>().ExitEntityChanged -= DetectExit;
     }
     #endregion
 
     #region respond
-    private void Detect(string[] feats)
+    private void DetectEnter(IEntity entity)
     {
-        GD.Print($"探测到特性为[{feats.Join("|")}]的衔接处");
+        if (entity is not Node node) return;
+        GD.Print($"探测到实体{node.Name}位于区域");
+        Game.Instance.TriggerHandler.TriggerEntity(entity);
+    }
+    
+    private void DetectExit(IEntity entity)
+    {
+        if (entity is not Node node) return;
+        GD.Print($"探测到实体{node.Name}离开区域");
+        Game.Instance.TriggerHandler.TriggerEntity(entity);
     }
     #endregion
 

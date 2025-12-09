@@ -1,17 +1,20 @@
-﻿using Godot;
+﻿using System.Text;
+using Godot;
 
-public class GameDialogWorld
+public class GameDialogueWorld
 {
     #region life
-    public GameDialogWorld(DialogBox dialogBox)
+    public GameDialogueWorld(DialogBox dialogBox, TextBox textBox)
     {
         _dialogBox = dialogBox;
+        _textBox = textBox;
         _dialogBox.Confirmed += NextDialog;
     }
     #endregion
     
     #region members
     private DialogBox _dialogBox;
+    private TextBox _textBox;
     #endregion
     
     #region fields
@@ -21,6 +24,13 @@ public class GameDialogWorld
     #endregion
     
     #region op
+    public void PopupText(string[] texts,Node2D spawn)
+    {
+        var sb = new StringBuilder();
+        foreach (var text in texts) sb.AppendLine(text);
+        _textBox.Popup(sb.ToString(),spawn.GlobalPosition);
+    }
+    
     public void Dialog(string[] dialogs)
     {
         _dialogs = dialogs;

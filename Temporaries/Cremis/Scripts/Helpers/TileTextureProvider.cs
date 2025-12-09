@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
-public static class TileTextureFactory
+public static class TileTextureProvider
 {
     #region fields
     private static string _sceneSetName = "debug";

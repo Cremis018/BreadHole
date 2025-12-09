@@ -4,10 +4,12 @@ using GodotSimpleTools;
 
 public partial class InfoBoardComp : Component
 {
-    [Notify,Export] public string InfoText { get => GetInfoText(); set => SetInfoText(value); }
+    [Notify,Export] public string[] InfoText { get => GetInfoText(); set => SetInfoText(value); }
 
     public void ShowText()
     {
-        //TODO:将文本内容显示在信息面板上
+        var node = GetParent();
+        if (node is not Node2D node2D) return;
+        Game.Instance.Dialogue.PopupText(InfoText,node2D);
     }
 }

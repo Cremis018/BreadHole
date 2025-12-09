@@ -63,28 +63,28 @@ public static class FeatureApplier
     {
         var comp = entity.E.AddComponentIfNone<JunctionComp>();
         comp.CanPass = true;
-        comp.Texture = TileTextureFactory.Get("wall");
+        comp.Texture = TileTextureProvider.Get("wall");
     }
     
     private static void HandleAirFeat(IEntity entity, string[] args)
     {
         var comp = entity.E.AddComponentIfNone<JunctionComp>();
         comp.CanPass = true;
-        comp.Texture = TileTextureFactory.Get("air");
+        comp.Texture = TileTextureProvider.Get("air");
     }
     
     private static void HandleDoorFeat(IEntity entity, string[] args)
     {
         var comp = entity.E.AddComponentIfNone<JunctionComp>();
         comp.CanPass = true;
-        comp.Texture = TileTextureFactory.Get("door");
+        comp.Texture = TileTextureProvider.Get("door");
     }
 
     private static void HandleGateFeat(IEntity entity, string[] args)
     {
         var comp = entity.E.AddComponentIfNone<JunctionComp>();
         comp.CanPass = false;
-        comp.Texture = TileTextureFactory.Get("gate");
+        comp.Texture = TileTextureProvider.Get("gate");
     }
 
     private static void HandleEyeFeat(IEntity entity, string[] args)
@@ -101,7 +101,7 @@ public static class FeatureApplier
         var comp = entity.E.AddComponentIfNone<PeepholeComp>();
         comp.PassDirection = direction;
         var sprite = node.AddNodeIfNone<Sprite2D>("PeepholeIcon");
-        sprite.Texture = TileTextureFactory.Get("eye");
+        sprite.Texture = TileTextureProvider.Get("eye");
     }
 
     private static void HandleLockedFeat(IEntity entity, string[] args)
@@ -112,14 +112,14 @@ public static class FeatureApplier
         var comp = entity.E.AddComponentIfNone<JunctionComp>();
         comp.CanPass = !isLock;
         var sprite = node.AddNodeIfNone<Sprite2D>("LockIcon");
-        sprite.Texture = TileTextureFactory.Get(isLock ? "lock" : "unlock");
+        sprite.Texture = TileTextureProvider.Get(isLock ? "lock" : "unlock");
     }
     
     private static void HandleCarpetFeat(IEntity entity, string[] args)
     {
         if (entity is not Node node) return;
         if (args.Length < 1) return;
-        var texture = TileTextureFactory.Get(args[0]);
+        var texture = TileTextureProvider.Get(args[0]);
         var sprite = node.AddNodeIfNone<Sprite2D>("Carpet");
         sprite.Texture = texture;
     }
@@ -135,9 +135,8 @@ public static class FeatureApplier
     private static void HandleTextFeat(IEntity entity, string[] args)
     {
         if (args.Length < 1) return;
-        var text = args.Join("|");
         var comp = entity.E.AddComponentIfNone<InfoBoardComp>();
-        comp.InfoText = text;
+        comp.InfoText = args;
     }
     #endregion
 }

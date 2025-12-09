@@ -57,7 +57,7 @@ public static class EventApplier
         if (args.Length < 2) return;
         var (x,y) = (int.Parse(args[0]),int.Parse(args[1]));
         if (Game.Instance.Map is null) return;
-        Game.Instance.Map.TpPlayer(new Vector2I(x,y));
+        Game.Instance.Misc.TpPlayer(new Vector2I(x,y));
         GD.Print($"玩家已传送到地图[{x},{y}]");
     }
     
@@ -66,15 +66,15 @@ public static class EventApplier
         if (args.Length < 1) return;
         var room = args[0];
         if (Game.Instance.Map is null) return;
-        Game.Instance.Map.GotoRoom(room);
+        Game.Instance.Global.Goto(room);
         GD.Print($"已进入地图[{room}]");
     }
 
     private static void HandleDialogEvent(TriggerComp _, string[] args)
     {
         if (args.Length < 1) return;
-        if (Game.Instance.Dialog is null) return;
-        Game.Instance.Dialog.Dialog(args);
+        if (Game.Instance.Dialogue is null) return;
+        Game.Instance.Dialogue.Dialog(args);
         GD.Print("已开始对话");
     }
 

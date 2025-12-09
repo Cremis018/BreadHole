@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://vh6a633redd3"]
+
+[ext_resource type="Script" uid="uid://bpd8fw8k4x5uw" path="res://Temporaries/Cremis/GameObjects/TextBox.cs" id="1_4tr6k"]
+[ext_resource type="FontFile" uid="uid://o5qsooevvw10" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_1.6.ttf" id="1_ottt8"]
+[ext_resource type="FontFile" uid="uid://b513meunl51fh" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_Bold_1.6.ttf" id="2_4tr6k"]
+[ext_resource type="FontFile" uid="uid://5lgkanhnc87s" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_3D.ttf" id="3_jvssh"]
+[ext_resource type="FontFile" uid="uid://xc46k7kyhnb" path="res://Assets/GUIs/Fonts/BoutiqueBitmap9x9_Gradient.ttf" id="4_uvefh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rijln"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.6)
+
+[node name="TextBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4tr6k")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -7.5
+offset_right = 20.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rijln")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_ottt8")
+theme_override_fonts/bold_font = ExtResource("2_4tr6k")
+theme_override_fonts/bold_italics_font = ExtResource("3_jvssh")
+theme_override_fonts/italics_font = ExtResource("4_uvefh")
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

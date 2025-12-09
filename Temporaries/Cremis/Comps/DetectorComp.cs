@@ -4,7 +4,8 @@ using GodotSimpleTools;
 public partial class DetectorComp : Component
 {
     #region prop
-    [Notify] public string[] DetectedFeatures { get => GetDetectedFeatures(); set => SetDetectedFeatures(value); }
+    [Notify] public IEntity EnterEntity { get => GetEnterEntity(); set => SetEnterEntity(value); }
+    [Notify] public IEntity ExitEntity { get => GetExitEntity(); set => SetExitEntity(value); }
     #endregion
 
     #region nodes
@@ -16,22 +17,35 @@ public partial class DetectorComp : Component
     public override void _Ready()
     {
         InitNodes();
-        N_Area.AreaEntered += Detect;
+        InitNotifies();
     }
 
     private void InitNodes()
     {
         N_Area ??= GetParent().GetNode<Area2D>("Area2D");
     }
+    
+    public override void _ExitTree()
+    {
+        DestroyNotifies();
+    }
     #endregion
 
-    #region op
-    private void Detect(Area2D area)
+    #region handle
+    [Receiver(nameof(N_Area.AreaEntered))]
+    private void Enter(Area2D area)
     {
         var node = area.GetParent();
-        if (node is not Junction junction) return;
-        DetectedFeatures = junction.E.GetComponent<FeatureComp>()
-            .Features;
+        if (node is not IEntity entity) return;
+        EnterEntity = entity;
+    }
+
+    [Receiver(nameof(N_Area.AreaExited))]
+    private void Exit(Area2D area)
+    {
+        var node = area.GetParent();
+        if (node is not IEntity entity) return;
+        ExitEntity = entity;
     }
     #endregion
 }

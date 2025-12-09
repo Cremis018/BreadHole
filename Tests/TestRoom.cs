@@ -19,7 +19,7 @@ public partial class TestRoom : Node
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton {ButtonMask:MouseButtonMask.Left})
-            _timerTriggerManager.Start();
+        // if (@event is InputEventMouseButton {ButtonMask:MouseButtonMask.Left})
+        //     _timerTriggerManager.Start();
     }
 }
