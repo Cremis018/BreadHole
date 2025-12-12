@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
 
 public static class NodeUtil
 {
@@ -13,6 +14,17 @@ public static class NodeUtil
             Name = name
         });
         return node.GetNode<T>(name);
+    }
+
+    public static void ClearChildren(this Node node)
+    {
+        var children = node.GetChildren();
+        if (children.Count == 0) return;
+        children.ToList().ForEach(n =>
+        {
+            node.RemoveChild(n);
+            n.QueueFree();
+        });
     }
     #endregion
 }

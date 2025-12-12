@@ -4,6 +4,9 @@ using System;
 public partial class Floor : Node2D,IEntity
 {
     #region entity
+    public static readonly PackedScene Scene = ResourceLoader
+        .Load<PackedScene>("res://Temporaries/Cremis/GameObjects/floor.tscn");
+    
     public Entity E { get; protected set; }
 
     public void InitEntity()

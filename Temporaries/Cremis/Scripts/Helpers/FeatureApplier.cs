@@ -38,7 +38,7 @@ public static class FeatureApplier
         foreach (var child in node.GetChildren())
             if (child is Sprite2D sprite)
                 sprite.Texture = null;
-        entity.E.ClearComponentWithBlacklist([junctionComp,mapCompositionComp,markableComp,featureComp]);
+        entity.E.ClearComponentWithout([junctionComp,mapCompositionComp,markableComp,featureComp]);
     }
 
     private static void ApplySingle(IEntity entity, string feature)

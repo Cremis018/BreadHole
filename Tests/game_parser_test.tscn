@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://claxwpp7w2tp7"]
+
+[ext_resource type="Script" uid="uid://bqruub3mndjhx" path="res://Temporaries/Cremis/GlueObjects/Game.cs" id="1_2hlxv"]
+[ext_resource type="Script" uid="uid://dg56q1hs0nda2" path="res://Tests/GameParserTest.cs" id="1_wwg04"]
+[ext_resource type="PackedScene" uid="uid://2gpffpl0m3hg" path="res://Temporaries/Cremis/GameObjects/dialog_box.tscn" id="2_wwg04"]
+[ext_resource type="PackedScene" uid="uid://bq8tgnmu1b8o1" path="res://Temporaries/Cremis/GlueObjects/timer_trigger_manager.tscn" id="3_pg6sr"]
+
+[node name="GameParserTest" type="Node"]
+script = ExtResource("1_wwg04")
+_res = Array[Resource]([])
+
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("N_MapRoot", "N_DialogBox")]
+script = ExtResource("1_2hlxv")
+N_MapRoot = NodePath("MapRoot")
+N_DialogBox = NodePath("CanvasLayer/DialogBox")
+
+[node name="MapRoot" type="Node2D" parent="Game"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Game"]
+
+[node name="DialogBox" parent="Game/CanvasLayer" instance=ExtResource("2_wwg04")]
+process_mode = 3
+visible = false
+
+[node name="TimerTriggerManager" parent="Game" instance=ExtResource("3_pg6sr")]

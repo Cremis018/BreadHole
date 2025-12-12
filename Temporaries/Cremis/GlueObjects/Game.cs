@@ -5,12 +5,12 @@ public partial class Game : Node
     #region props
     public static Game Instance { get; private set; }
     
-    public GameMapWorld Map { get; private set; }
-    public GameMiscWorld Misc { get; private set; }
-    public GameDialogueWorld Dialogue { get; private set; }
-    public GamePocketWorld Pocket { get; private set; }
-    public GameGlobalWorld Global { get; private set; }
-    public TriggerHandler TriggerHandler { get; private set; }
+    public GameMapWorld Map { get; set; }
+    public GameMiscWorld Misc { get; set; }
+    public GameDialogueWorld Dialogue { get; set; }
+    public GamePocketWorld Pocket { get; set; }
+    public GameGlobalWorld Global { get; set; }
+    public TriggerHandler TriggerHandler { get; set; }
     #endregion
 
     #region nodes

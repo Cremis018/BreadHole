@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -6,12 +6,12 @@ using Godot;
 public class Entity(Node node)
 {
     private Node Node { get; } = node;
-    
-    private List<string> _components = [];
-    
-    public void AddComponent(Component component,string name = null)
+
+    private readonly List<string> _components = [];
+
+    public void AddComponent(Component component, string name = null)
     {
-        name = GetCompName(component,name);
+        name = GetCompName(component, name);
         component.Name = name;
         Node.AddChild(component);
         _components.Add(name);
@@ -20,25 +20,26 @@ public class Entity(Node node)
     public void AddComponentIfNone(string oldName, Component component, string name = null)
     {
         if (!HasComponent(oldName))
-            AddComponent(component,name);
+            AddComponent(component, name);
     }
     
-    public T AddComponentIfNone<T>(T component = null,string name = null) where T : Component
+    public T AddComponentIfNone<T>(T component = null, string name = null) where T : Component
     {
         if (HasComponent<T>()) return GetComponent<T>();
         component ??= Component.Create<T>();
-        AddComponent(component,name);
+        AddComponent(component, name);
         return GetComponent<T>();
     }
 
     public void BatchAddComponent(params Component[] components)
     {
-        foreach (var component in components) AddComponent(component);
+        foreach (var component in components) 
+            AddComponent(component);
     }
 
     public void ReplaceComponent(Component component, string name = null)
     {
-        name = GetCompName(component,name);
+        name = GetCompName(component, name);
         component.Name = name;
         if (!HasComponent(name))
         {
@@ -66,26 +67,33 @@ public class Entity(Node node)
     public void RemoveComponent(string name, bool free = true)
     {
         var component = Node.GetNodeOrNull(name);
-        if (component is null) return;
+        if (component is null) 
+            return;
+            
         Node.RemoveChild(component);
-        if (free) component.QueueFree();
+        if (free) 
+            component.QueueFree();
         _components.Remove(name);
     }
     
     public void RemoveComponent<T>(string name = null) where T : Component
     {
-        if (string.IsNullOrWhiteSpace(name)) name = typeof(T).ToString();
+        if (string.IsNullOrWhiteSpace(name)) 
+            name = typeof(T).ToString();
         RemoveComponent(name);
     }
 
     public void BatchRemoveComponent(params string[] names)
     {
-        foreach (var name in names) RemoveComponent(name);
+        foreach (var name in names) 
+            RemoveComponent(name);
     }
     
     public T GetComponent<T>(string name = null) where T : Component
     {
-        if (string.IsNullOrWhiteSpace(name)) name = typeof(T).ToString();
+        if (string.IsNullOrWhiteSpace(name)) 
+            name = typeof(T).ToString();
+            
         return !HasComponent(name) 
             ? throw new Exception($"Component {name} not found") 
             : Node.GetNode<T>(name);
@@ -107,29 +115,33 @@ public class Entity(Node node)
         for (int i = 0; i < length; i++)
         {
             var component = _components.LastOrDefault();
-            RemoveComponent(component,free);
+            RemoveComponent(component, free);
         }
     }
 
-    public void ClearComponentWithBlacklist(string[] blackList, bool free = true)
+    public void ClearComponentWithout(string[] blackList, bool free = true)
     {
         var length = _components.Count;
         for (int i = 0; i < length; i++)
         {
             var compName = _components.LastOrDefault();
-            if (blackList.Contains(compName)) continue;
-            RemoveComponent(compName,free);
+            if (blackList.Contains(compName)) 
+                continue;
+                
+            RemoveComponent(compName, free);
         }
     }
 
-    public void ClearComponentWithBlacklist(Component[] blackList, bool free = true)
+    public void ClearComponentWithout(Component[] blackList, bool free = true)
     {
         var length = _components.Count;
         for (int i = 0; i < length; i++)
         {
             var compName = _components.LastOrDefault();
-            if (blackList.Any(x => x.Name == compName)) continue;
-            RemoveComponent(compName,free);
+            if (blackList.Any(x => x.Name == compName)) 
+                continue;
+                
+            RemoveComponent(compName, free);
         }
     }
 

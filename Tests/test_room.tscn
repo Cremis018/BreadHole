@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://cfmjcfu73213o" path="res://Tests/TestRoom.cs" id="1_o1ool"]
 [ext_resource type="Script" uid="uid://b1dj6npabyqb5" path="res://Temporaries/Cremis/Comps/TriggerComp.cs" id="2_o1ool"]
 [ext_resource type="PackedScene" uid="uid://2gpffpl0m3hg" path="res://Temporaries/Cremis/GameObjects/dialog_box.tscn" id="3_7i6r8"]
-[ext_resource type="Script" uid="uid://bqruub3mndjhx" path="res://Temporaries/Cremis/Scripts/Managers/Game.cs" id="3_pjlhu"]
+[ext_resource type="Script" uid="uid://bqruub3mndjhx" path="res://Temporaries/Cremis/GlueObjects/Game.cs" id="3_pjlhu"]
 [ext_resource type="PackedScene" uid="uid://bq8tgnmu1b8o1" path="res://Temporaries/Cremis/GlueObjects/timer_trigger_manager.tscn" id="5_b5rw3"]
 
 [node name="TestRoom" type="Node" node_paths=PackedStringArray("_timerTriggerManager")]
 script = ExtResource("1_o1ool")
-_timerTriggerManager = NodePath("TimerTriggerManager")
+_timerTriggerManager = NodePath("Game/TimerTriggerManager")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("2_o1ool")
@@ -83,4 +83,4 @@ N_DialogBox = NodePath("CanvasLayer/DialogBox")
 process_mode = 3
 visible = false
 
-[node name="TimerTriggerManager" parent="." instance=ExtResource("5_b5rw3")]
+[node name="TimerTriggerManager" parent="Game" instance=ExtResource("5_b5rw3")]

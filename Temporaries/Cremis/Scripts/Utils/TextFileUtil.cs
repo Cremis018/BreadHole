@@ -72,6 +72,22 @@ public static class TextFileUtil
         }
     }
 
+    public static string[] ReadLines(string path)
+    {
+        string? absPath = Parse(path);
+        if (absPath == null)
+            return [];
+
+        try
+        {
+            return File.ReadAllLines(absPath, System.Text.Encoding.UTF8);
+        }
+        catch
+        {
+            return [];
+        }      
+    }
+
     /// <summary>
     /// 将文本内容写入目标文件（UTF-8），若目录不存在则自动创建；已存在则覆盖。
     /// </summary>
