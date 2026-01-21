@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ktegif5rfqx3"]
+
+[ext_resource type="Script" uid="uid://b8hadr8o38qc5" path="res://Test/TestRoom.cs" id="1_mlcx1"]
+[ext_resource type="Script" uid="uid://76xdwe0asbh6" path="res://Test/TestEntity.cs" id="2_5pilb"]
+
+[node name="TestRoom" type="Node2D"]
+script = ExtResource("1_mlcx1")
+
+[node name="TestEntity" type="Node" parent="."]
+script = ExtResource("2_5pilb")
