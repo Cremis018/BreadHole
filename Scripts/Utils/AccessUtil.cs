@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Godot;
 using FileAccess = Godot.FileAccess;
 
-public static class AccessUtil
+internal static class AccessUtil
 { 
     public static bool IsVirtualPath(this string path)
     {

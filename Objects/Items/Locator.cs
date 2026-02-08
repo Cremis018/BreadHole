@@ -1,4 +1,4 @@
-﻿internal class Crumbs : IItem
+﻿internal class Locator : IItem
 {
     public int Id { get; set; }
     public void UsePrimarily(GameWorld world)

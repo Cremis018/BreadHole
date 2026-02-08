@@ -1,4 +1,4 @@
-﻿public class StringUtil
+﻿internal class StringUtil
 {
     
 }

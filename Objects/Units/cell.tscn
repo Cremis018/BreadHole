@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dtxiydwfie6rv"]
+
+[ext_resource type="Script" uid="uid://rjnijlod4bet" path="res://Objects/Units/Cell.cs" id="1_15pbw"]
+
+[node name="Cell" type="Node2D" unique_id=1633555007]
+script = ExtResource("1_15pbw")

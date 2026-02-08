@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 
-public static class ItemTextureStorage
+internal static class ItemTextureStorage
 {
     private static readonly object _lock = new();
     private static readonly Dictionary<string, Texture2D> _nameTextureMap = new(StringComparer.OrdinalIgnoreCase);

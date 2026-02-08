@@ -1,29 +1,62 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class TestRoom : Node2D
 {
-    [Export] public VBoxContainer _co;
+    [Export(PropertyHint.ResourceType)] public Resource a;
     
     public override void _Ready()
     {
-        var tc = new TextureConverter();
-        var map = tc.FolderToTextureMap(@"Assets");
-        GD.Print(map.Count);
-        foreach (var (name, texture)  in map)
+        object[] objects = new object[1000000];
+        var random = new Random();
+        
+        // 填充测试数据
+        for (int i = 0; i < objects.Length; i++)
         {
-            var label = new Label();
-            label.Text = name;
-            var rect = new TextureRect();
-            rect.Texture = texture;
-            var h = new HBoxContainer();
-            h.AddChild(label);
-            h.AddChild(rect);
-            _co.AddChild(h);
+            objects[i] = random.Next(2) == 0 ? new string('a', 10) : new object();
         }
-        // var texture2D = ResourceLoader.Load<Texture2D>(@"C:\MyProjects\GameProjects\BreadHole\Assets\99CF745E7D527EB9842CC1D9F50FBE3D.png");
-        // var textureRect = new TextureRect();
-        // textureRect.Texture = texture2D;
-        // AddChild(textureRect);
+        
+        var sw = Stopwatch.StartNew();
+        
+        // 方法1: 传统is + cast
+        int count1 = 0;
+        foreach (var obj in objects)
+        {
+            if (obj is string)
+            {
+                var str = (string)obj;
+                count1 += str.Length;
+            }
+        }
+
+        GD.Print($"传统方式: {sw.ElapsedMilliseconds}ms, Count: {count1}");
+        
+        sw.Restart();
+        
+        // 方法2: 模式匹配 (推荐)
+        int count2 = 0;
+        foreach (var obj in objects)
+        {
+            if (obj is string str)
+            {
+                count2 += str.Length;
+            }
+        }
+        GD.Print($"模式匹配: {sw.ElapsedMilliseconds}ms, Count: {count2}");
+        
+        sw.Restart();
+        
+        // 方法3: as操作符
+        int count3 = 0;
+        foreach (var obj in objects)
+        {
+            var str = obj as string;
+            if (str != null)
+            {
+                count3 += str.Length;
+            }
+        }
+        GD.Print($"as操作符: {sw.ElapsedMilliseconds}ms, Count: {count3}");
     }
 }

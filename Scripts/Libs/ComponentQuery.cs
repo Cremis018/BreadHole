@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class ComponentQuery
 {
@@ -63,6 +64,8 @@ public class ComponentQuery
         return GetComponent<T>(name);
     }
     
+    public Component[] GetAllComponents() => _entity.Components.Values.ToArray();
+
     //has
     public bool HasComponent(string name)
     {

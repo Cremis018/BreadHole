@@ -1,4 +1,4 @@
-﻿public static class GameSettingsStorage
+﻿internal static class GameSettingsStorage
 {
     public static string UserLevelRootPath { get; private set; } 
         = @"C:\MyProjects\GameProjects\BreadHole";

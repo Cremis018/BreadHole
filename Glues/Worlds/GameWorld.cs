@@ -1,4 +1,4 @@
-﻿public class GameWorld
+﻿internal class GameWorld
 {
     
 }

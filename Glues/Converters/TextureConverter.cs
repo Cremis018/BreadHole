@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Godot;
-using FileAccess = Godot.FileAccess;
 
-public class TextureConverter
+internal class TextureConverter
 {
     #region read
     public Texture2D PathToSingleTexture(string path)

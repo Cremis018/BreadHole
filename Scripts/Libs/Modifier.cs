@@ -1,72 +1,13 @@
 ﻿using System;
-using Godot;
 
-[GlobalClass]
-public partial class Modifier : Node
+/* HACK : Modifier是为了临时解决Renderer中可能遇到的匿名函数订阅问题，
+ 为了能够让组件的修改一对一影响实体，而不是一个组件的修改让全体实体进入修改的逻辑。
+ 目前这种写法还是要手动声明Modifier数组，后续肯定要加入到Renderer中实现自动化
+ */
+public class Modifier<E,T>(E entity,Action<E,T> modifyMethod) where E : IEntity
 {
-    public bool IsLoaded { get; private set; }
-    public bool IsLoadedInEntity { get; private set; }
-    
-    private bool _enable = true;
-    [Export]
-    public bool Enable
+    public void Modify(T param)
     {
-        get => _enable;
-        set
-        {
-            if (_enable == value) return;
-            _enable = value;
-            if (_enable)
-            {
-                _OnEnabled();
-                BeEnabled?.Invoke();
-            }
-            else
-            {
-                _OnDisabled();
-                BeDisabled?.Invoke();
-            }
-        }
-    }
-
-    public event Action BeEnabled;
-    public event Action BeDisabled;
-    public event Action Loaded;
-    public event Action LoadedInEntity;
-
-    public void Load()
-    {
-        if (IsLoaded) return;
-        _OnLoaded();
-        IsLoaded = true;
-        Loaded?.Invoke();
-    }
-
-    public void LoadInEntity(IEntity entity)
-    {
-        if (IsLoadedInEntity) return;
-        _OnLoadedInEntity(entity);
-        IsLoadedInEntity = true;
-        LoadedInEntity?.Invoke();
-    }
-    
-    public virtual void _OnLoaded()
-    {
-        
-    }
-
-    public virtual void _OnLoadedInEntity(IEntity entity)
-    {
-        
-    }
-
-    public virtual void _OnEnabled()
-    {
-        
-    }
-
-    public virtual void _OnDisabled()
-    {
-        
+        modifyMethod(entity,param);
     }
 }

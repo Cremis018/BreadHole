@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class MathUtil
+internal class MathUtil
 {
     public static float ShortestRotateTarget(float from, float to)
     {

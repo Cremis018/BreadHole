@@ -13,7 +13,6 @@ public partial class Player : Node2D, IEntity
     public override void _EnterTree()
     {
         E ??= new(this);
-        ViewInitializer.LoadingView(this);
     }
 
     private Vector2I GetFacingCoord()
@@ -29,10 +28,4 @@ public partial class Player : Node2D, IEntity
         var dir = E.GetComponent<DirectionComp>().Direction;
         return CoordUtil.CalcBackingCoord(coord, dir);
     }
-    
-    private void OnDirectionChanged(Direction direction)
-    {
-        Rotation = CoordUtil.DirectionToRotation(direction);
-    }
-
 }

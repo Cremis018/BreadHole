@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-public class CoordUtil
+internal class CoordUtil
 {
     public static Vector2I CalcFacingCoord(Vector2I origin, Direction direction) => 
         origin + DirectionToVector2I(direction);

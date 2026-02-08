@@ -5,10 +5,11 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Configs\" />
     <Folder Include="Glues\Managers\" />
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GodotSimpleTools" Version="0.0.0.12" />
+    <PackageReference Include="GodotSimpleTools" Version="0.0.0.13" />
   </ItemGroup>
 </Project>
