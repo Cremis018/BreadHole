@@ -2,6 +2,6 @@
 
 public interface IEntity
 {
-    Dictionary<string,Component> Components { get; }
+    Array<Component> Components { get; }
     ComponentQuery E { get; }
 }

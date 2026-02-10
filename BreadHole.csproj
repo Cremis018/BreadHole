@@ -6,8 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Configs\" />
-    <Folder Include="Glues\Managers\" />
-    <Folder Include="Test\" />
+    <Folder Include="Objects\Features\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GodotSimpleTools" Version="0.0.0.13" />

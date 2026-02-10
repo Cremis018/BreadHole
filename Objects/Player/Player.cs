@@ -4,7 +4,7 @@ using Godot.Collections;
 [GlobalClass]
 public partial class Player : Node2D, IEntity
 {
-    [Export] public Dictionary<string, Component> Components { get; private set; }
+    [Export] public Array<Component> Components { get; private set; }
     public ComponentQuery E { get; private set; }
 
     public Vector2I FacingCoord => GetFacingCoord();

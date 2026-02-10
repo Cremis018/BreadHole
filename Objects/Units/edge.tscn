@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dfnm1bam34vxg"]
+
+[ext_resource type="Script" uid="uid://dtwew6fa4dkim" path="res://Objects/Units/Edge.cs" id="1_saric"]
+
+[node name="Edge" type="Node2D" unique_id=1446945378]
+script = ExtResource("1_saric")

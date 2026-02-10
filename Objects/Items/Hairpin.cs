@@ -1,13 +1,7 @@
-﻿internal class Hairpin : IItem
-{
-    public int Id { get; set; }
-    public void UsePrimarily(GameWorld world)
-    {
-        throw new System.NotImplementedException();
-    }
+﻿using Godot;
 
-    public void UseSecondary(GameWorld world)
-    {
-        throw new System.NotImplementedException();
-    }
+[GlobalClass]
+public partial class Hairpin : Item
+{
+    
 }
