@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Godot;
 
-internal static class ItemTextureStorage
+internal static class UnitTextureStorage
 {
-    public const string InnerPath = "res://Assets/Sprites/Items/";
+    public const string InnerPath = "res://Assets/Sprites/Units/";
     private static readonly object _lock = new();
     private static readonly Dictionary<string, Texture2D> _nameTextureMap = new(StringComparer.OrdinalIgnoreCase);
 
@@ -18,6 +18,5 @@ internal static class ItemTextureStorage
     }
 
     public static Texture2D GetTexture(string name) => _nameTextureMap.GetValueOrDefault(name);
-
-    public static Texture2D GetTexture(Type type) => GetTexture(type.ToString());
+    public static Texture2D GetTexture(string prefix, string name) => _nameTextureMap.GetValueOrDefault($"{prefix}_{name}");
 }

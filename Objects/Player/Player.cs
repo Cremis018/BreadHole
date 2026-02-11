@@ -9,10 +9,13 @@ public partial class Player : Node2D, IEntity
 
     public Vector2I FacingCoord => GetFacingCoord();
     public Vector2I BackingCoord => GetBackingCoord();
+    
+    private DirectionModi _directionModi;
 
     public override void _EnterTree()
     {
         E ??= new(this);
+        _directionModi = new(this);
     }
 
     private Vector2I GetFacingCoord()

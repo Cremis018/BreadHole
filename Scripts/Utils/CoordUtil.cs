@@ -17,7 +17,38 @@ internal class CoordUtil
             Direction.North => Vector2I.Up,
             _ => Vector2I.Zero
         };
+    
+    public static Direction Vector2IToDirection(Vector2I vector2I)
+    {
+        if (vector2I == Vector2I.Right)
+            return Direction.East;
+        if (vector2I == Vector2I.Down)
+            return Direction.South;
+        if (vector2I == Vector2I.Left)
+            return Direction.West;
+        if (vector2I == Vector2I.Up)
+            return Direction.North;
+        return Direction.None;
+    }
 
     public static float DirectionToRotation(Direction direction) =>
         (int)direction * float.Pi / 2;
+
+    public static bool IsCellCoord(Vector2I coord) => coord.X % 2 == 1 && coord.Y % 2 == 1;
+
+    public static bool IsJunctionCoord(Vector2I coord,out bool vertical)
+    {
+        if (coord.X % 2 == 1 && coord.Y % 2 == 0)
+        {
+            vertical = true;
+            return true;
+        }
+        if (coord.X % 2 == 0 && coord.Y % 2 == 1)
+        {
+            vertical = false;
+            return true;
+        }
+        vertical = false;
+        return false;
+    }
 }

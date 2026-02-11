@@ -1,4 +1,4 @@
-﻿internal static class GameSettingsStorage
+﻿internal class GameSettingsStorage
 {
     public static void Refresh()
     {

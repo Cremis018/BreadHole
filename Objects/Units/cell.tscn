@@ -2,32 +2,33 @@
 
 [ext_resource type="Script" uid="uid://rjnijlod4bet" path="res://Objects/Units/Cell.cs" id="1_15pbw"]
 [ext_resource type="Script" uid="uid://mdvi1w5s2x2" path="res://Components/RenderableComp.cs" id="2_5n674"]
-[ext_resource type="Script" uid="uid://b4m1ab2nsleff" path="res://Scripts/Libs/Component.cs" id="2_tcm4j"]
+[ext_resource type="Script" uid="uid://b4m1ab2nsleff" path="res://Scripts/Libs/RCL/Component.cs" id="2_tcm4j"]
 [ext_resource type="Script" uid="uid://cf116go5kfnqk" path="res://Components/CoordinateComp.cs" id="3_5kjue"]
+[ext_resource type="Texture2D" uid="uid://b0t0xvu7wjfx0" path="res://Assets/Sprites/Units/debug_plank.png" id="3_8d5e8"]
 [ext_resource type="Script" uid="uid://ye6rp6iprxb5" path="res://Components/MarkableComp.cs" id="5_m3cfr"]
 [ext_resource type="Script" uid="uid://6sjuyid4c1gy" path="res://Components/DropSlotComp.cs" id="6_8d5e8"]
 
-[sub_resource type="Resource" id="Resource_dn3ey"]
+[sub_resource type="Resource" id="Resource_m3cfr"]
 script = ExtResource("2_5n674")
-IsFixed = true
+Texture = ExtResource("3_8d5e8")
 metadata/_custom_type_script = "uid://mdvi1w5s2x2"
 
-[sub_resource type="Resource" id="Resource_tcm4j"]
+[sub_resource type="Resource" id="Resource_8d5e8"]
 script = ExtResource("3_5kjue")
-IsFixed = true
 metadata/_custom_type_script = "uid://cf116go5kfnqk"
 
 [sub_resource type="Resource" id="Resource_0wrn0"]
 script = ExtResource("5_m3cfr")
 ActivateItems = null
-IsFixed = true
 metadata/_custom_type_script = "uid://ye6rp6iprxb5"
 
 [sub_resource type="Resource" id="Resource_5ra4y"]
 script = ExtResource("6_8d5e8")
-IsFixed = true
 metadata/_custom_type_script = "uid://6sjuyid4c1gy"
 
-[node name="Cell" type="Node2D" unique_id=1633555007]
+[node name="Cell" type="Node2D" unique_id=1633555007 node_paths=PackedStringArray("_sprite")]
 script = ExtResource("1_15pbw")
-Components = Array[ExtResource("2_tcm4j")]([SubResource("Resource_dn3ey"), SubResource("Resource_tcm4j"), SubResource("Resource_0wrn0"), SubResource("Resource_5ra4y")])
+Components = Array[ExtResource("2_tcm4j")]([SubResource("Resource_m3cfr"), SubResource("Resource_8d5e8"), SubResource("Resource_0wrn0"), SubResource("Resource_5ra4y")])
+_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=731041988]

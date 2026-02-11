@@ -7,9 +7,18 @@ public class ComponentQuery
 
     #region ctor
     public ComponentQuery(IEntity entity)
-    { 
-        _entity = entity; 
-        foreach (var component in entity.Components) component._OnLoaded(entity);
+    {
+        _entity = entity;
+        var components = _entity.Components;
+        var dups = new Component[components.Count];
+        for (var i = 0; i < components.Count; i++)
+        {
+            var component = entity.Components[i].Duplicate() as Component;
+            dups[i] = component;
+            component?._OnLoaded(entity);
+        }
+        _entity.Components.Clear();
+        _entity.Components.AddRange(dups);
     }
     #endregion
     
@@ -19,6 +28,7 @@ public class ComponentQuery
     {
         if (_entity.Components.Any(c => c.GetType() == component.GetType() && c.UniqueName == name)) return false;
         component.UniqueName = name;
+        component.IsFixed = false;
         _entity.Components.Add(component);
         component._OnAdded(_entity);
         return true;

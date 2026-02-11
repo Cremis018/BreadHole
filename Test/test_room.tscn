@@ -2,10 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dlak7cac2s6np" path="res://Test/TestRoom.cs" id="1_6g7rg"]
 
-[node name="TestRoom" type="Node2D" unique_id=1657897824 node_paths=PackedStringArray("_co")]
+[node name="TestRoom" type="Node2D" unique_id=1657897824]
+texture_filter = 1
 script = ExtResource("1_6g7rg")
-_co = NodePath("VBoxContainer")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=926046601]
-offset_right = 40.0
-offset_bottom = 40.0

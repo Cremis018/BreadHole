@@ -1,6 +1,29 @@
 [gd_scene format=3 uid="uid://dfnm1bam34vxg"]
 
 [ext_resource type="Script" uid="uid://dtwew6fa4dkim" path="res://Objects/Units/Edge.cs" id="1_saric"]
+[ext_resource type="Texture2D" uid="uid://r1xlnjw2gowi" path="res://Assets/Sprites/Units/debug_edge.png" id="2_qxu18"]
+[ext_resource type="Script" uid="uid://b4m1ab2nsleff" path="res://Scripts/Libs/RCL/Component.cs" id="2_vayvm"]
+[ext_resource type="Script" uid="uid://mdvi1w5s2x2" path="res://Components/RenderableComp.cs" id="3_vayvm"]
+[ext_resource type="Script" uid="uid://cf116go5kfnqk" path="res://Components/CoordinateComp.cs" id="4_eywqs"]
+[ext_resource type="Script" uid="uid://ye6rp6iprxb5" path="res://Components/MarkableComp.cs" id="5_n7uaf"]
 
-[node name="Edge" type="Node2D" unique_id=1446945378]
+[sub_resource type="Resource" id="Resource_4amsj"]
+script = ExtResource("3_vayvm")
+Texture = ExtResource("2_qxu18")
+metadata/_custom_type_script = "uid://mdvi1w5s2x2"
+
+[sub_resource type="Resource" id="Resource_po4ru"]
+script = ExtResource("4_eywqs")
+metadata/_custom_type_script = "uid://cf116go5kfnqk"
+
+[sub_resource type="Resource" id="Resource_rhf5j"]
+script = ExtResource("5_n7uaf")
+ActivateItems = null
+metadata/_custom_type_script = "uid://ye6rp6iprxb5"
+
+[node name="Edge" type="Node2D" unique_id=1446945378 node_paths=PackedStringArray("_sprite")]
 script = ExtResource("1_saric")
+Components = Array[ExtResource("2_vayvm")]([SubResource("Resource_4amsj"), SubResource("Resource_po4ru"), SubResource("Resource_rhf5j")])
+_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1308441623]

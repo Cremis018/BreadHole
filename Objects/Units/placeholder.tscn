@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cl68yx036ljlt"]
+
+[ext_resource type="Script" uid="uid://f0a1b4htka0e" path="res://Objects/Units/Placeholder.cs" id="1_hbkw8"]
+[ext_resource type="Script" uid="uid://cf116go5kfnqk" path="res://Components/CoordinateComp.cs" id="2_k1bkv"]
+[ext_resource type="Script" uid="uid://b4m1ab2nsleff" path="res://Scripts/Libs/RCL/Component.cs" id="2_prw1h"]
+
+[sub_resource type="Resource" id="Resource_prw1h"]
+script = ExtResource("2_k1bkv")
+metadata/_custom_type_script = "uid://cf116go5kfnqk"
+
+[node name="Placeholder" type="Node2D" unique_id=1460477065]
+script = ExtResource("1_hbkw8")
+Components = Array[ExtResource("2_prw1h")]([SubResource("Resource_prw1h")])

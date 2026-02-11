@@ -1,18 +1,25 @@
 using Godot;
-using System;
-using System.Diagnostics;
 
 public partial class TestRoom : Node2D
 {
     public override void _Ready()
     {
-        var b = new B();
-        b.A.Aaa = "777";
-        b.A.Bbb.Add(2);
-        GD.Print(b.A.Aaa);
-        GD.Print(b.A.Bbb.Count);
-        b.C();
-        GD.Print(b.A.Aaa);
-        GD.Print(b.A.Bbb.Count);
+        // var textureConverter = new TextureConverter();
+        // var map = textureConverter.FolderToTextureMap(UnitTextureStorage.InnerPath);
+        // UnitTextureStorage.UpdateData(map);
+        var builder = new UnitsBuilder(this);
+        var mc = new MapContentConverter();
+        var storage = mc.Read([
+            "=========",
+            "]O+O+O+O[",
+            "]+ + = +[",
+            "]O+O|#|O[",
+            "]= = = +[",
+            "]X+O+O+X[",
+            "========="
+        ]);
+        builder.Build(storage);
+
+        GD.Print(mc.Write(storage));
     }
 }

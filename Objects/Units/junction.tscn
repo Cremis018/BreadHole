@@ -1,25 +1,29 @@
 [gd_scene format=3 uid="uid://bstgki13l6x1n"]
 
 [ext_resource type="Script" uid="uid://bncbukcupptgy" path="res://Objects/Units/Junction.cs" id="1_cf2xb"]
-[ext_resource type="Script" uid="uid://cvjswwucgm7nu" path="res://Renderers/JunctionVHRnd.cs" id="2_ebf36"]
 [ext_resource type="Script" uid="uid://cf116go5kfnqk" path="res://Components/CoordinateComp.cs" id="2_h7ng2"]
+[ext_resource type="Script" uid="uid://b4m1ab2nsleff" path="res://Scripts/Libs/RCL/Component.cs" id="2_wt7lg"]
+[ext_resource type="Texture2D" uid="uid://c5p4jgm0hcbyr" path="res://Assets/Sprites/Units/debug_door.png" id="3_o42u5"]
+[ext_resource type="Script" uid="uid://mdvi1w5s2x2" path="res://Components/RenderableComp.cs" id="4_tliv8"]
+[ext_resource type="Script" uid="uid://ye6rp6iprxb5" path="res://Components/MarkableComp.cs" id="6_v0lj0"]
 
-[sub_resource type="Resource" id="Resource_khgfc"]
+[sub_resource type="Resource" id="Resource_g30kw"]
+script = ExtResource("4_tliv8")
+Texture = ExtResource("3_o42u5")
+metadata/_custom_type_script = "uid://mdvi1w5s2x2"
+
+[sub_resource type="Resource" id="Resource_p7sh3"]
 script = ExtResource("2_h7ng2")
-Coordinate = Vector2i(5, 4)
-IsFixed = true
 metadata/_custom_type_script = "uid://cf116go5kfnqk"
 
-[node name="Junction" type="Node2D" unique_id=50873484]
+[sub_resource type="Resource" id="Resource_ink2o"]
+script = ExtResource("6_v0lj0")
+ActivateItems = null
+metadata/_custom_type_script = "uid://ye6rp6iprxb5"
+
+[node name="Junction" type="Node2D" unique_id=50873484 node_paths=PackedStringArray("_sprite")]
 script = ExtResource("1_cf2xb")
-Components = Dictionary[String, Object]({
-"CoordinateComp": SubResource("Resource_khgfc")
-})
+Components = Array[ExtResource("2_wt7lg")]([SubResource("Resource_g30kw"), SubResource("Resource_p7sh3"), SubResource("Resource_ink2o")])
+_sprite = NodePath("Sprite2D")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=528830575]
-polygon = PackedVector2Array(-17, -46, -17, 50, 45, 49, 32, -47)
-
-[node name="JunctionVHRnd" type="Node" parent="." unique_id=169780400 node_paths=PackedStringArray("Targets")]
-script = ExtResource("2_ebf36")
-Targets = [NodePath("..")]
-metadata/_custom_type_script = "uid://cvjswwucgm7nu"
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1615450668]

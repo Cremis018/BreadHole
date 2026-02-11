@@ -4,83 +4,74 @@ using Godot;
 
 public class CoordUnitStorage
 {
-    #region cache
-    private bool _isDirty = false;
-    private Rect2I _cacheRect;
-    private Rect2I _cacheRowColRect;
-    #endregion
-    
-    private Dictionary<Vector2I,IUnit> _coordUnitMap = [];
+    private Dictionary<Vector2I,ICell> _coordCellMap = [];
+    private Dictionary<Vector2I,IJunction> _coordJunctionMap = [];
+    private Dictionary<Vector2I, IUnit> _coordOtherMap = [];
 
-    public void SetStorage(Dictionary<Vector2I, IUnit> storage)
+    public void SetCellStorage(Dictionary<Vector2I, ICell> storage)
     {
-        _coordUnitMap = storage;
-        _isDirty = true;
+        _coordCellMap = storage;
     }
     
-    public void SetUnit(Vector2I coord, IUnit unit)
+    public void SetJunctionStorage(Dictionary<Vector2I, IJunction> storage)
     {
-        _coordUnitMap[coord] = unit;
-        _isDirty = true;
+        _coordJunctionMap = storage;
+    }
+    
+    public bool SetUnit(Vector2I coord, IUnit unit)
+    {
+        switch (unit)
+        {
+            case ICell cell when CoordUtil.IsCellCoord(coord):
+                _coordCellMap[coord] = cell;
+                break;
+            case IJunction junction when CoordUtil.IsJunctionCoord(coord,out _):
+                _coordJunctionMap[coord] = junction;
+                break;
+            default:
+                _coordOtherMap[coord] = unit;
+                return false;
+        }
+        return true;
     }
 
-    public IUnit GetUnit(Vector2I coord) => _coordUnitMap[coord];
-
-    public T[] GetUnits<T>() where T : Node,IUnit
+    public IUnit GetUnit(Vector2I coord)
     {
-        if (typeof(T) != typeof(Cell)) return _coordUnitMap.Values.OfType<T>().ToArray();
-        var pairs = _coordUnitMap.Where(p => p.Key.X % 2 == 1 && p.Key.Y % 2 == 1);
-        return pairs.Select(p => p.Value as T).ToArray();
+        if (CoordUtil.IsCellCoord(coord)) return _coordCellMap.GetValueOrDefault(coord);
+        if (CoordUtil.IsJunctionCoord(coord,out _)) return _coordJunctionMap.GetValueOrDefault(coord);
+        return _coordOtherMap.GetValueOrDefault(coord);
     }
 
-    public Vector2I[] GetCoords(bool sort = false)
+    public T[] GetUnits<T>() where T : IUnit
     {
-        var keys = _coordUnitMap.Keys;
-        return sort ? keys.OrderBy(k => k.X).ThenBy(k => k.Y).ToArray() : keys.ToArray();
+        if (typeof(T) == typeof(ICell)) return _coordCellMap.Values.OfType<T>().ToArray();
+        if (typeof(T) == typeof(IJunction)) return _coordJunctionMap.Values.OfType<T>().ToArray();
+        return _coordOtherMap.Values.OfType<T>().ToArray();
     }
 
-    public Vector2I[][] GetVec2Coords(bool vertical = false)
+    public Vector2I[] GetCoords<T>(bool sort = false,bool xy = true) where T : IUnit
     {
-        var coords = GetCoords(true);
-        return vertical
-            ? coords.GroupBy(v => v.X).OrderBy(g => g.Key)
-                .Select(g => g.OrderBy(v => v.Y).ToArray()).ToArray()
-            : coords.GroupBy(v => v.Y).OrderBy(g => g.Key)
-                .Select(g => g.OrderBy(v => v.X).ToArray()).ToArray();
+        IEnumerable<Vector2I> coords;
+        if (typeof(T) == typeof(IUnit))
+            coords = _coordCellMap.Keys
+                .Concat(_coordJunctionMap.Keys).Concat(_coordOtherMap.Keys);
+        else if (typeof(T) == typeof(ICell)) coords = _coordCellMap.Keys;
+        else if (typeof(T) == typeof(Cell)) coords = _coordCellMap.Where(p => p.Value is Cell).Select(p => p.Key);
+        else if (typeof(T) == typeof(Void)) coords = _coordCellMap.Where(p => p.Value is Void).Select(p => p.Key);
+        else if (typeof(T) == typeof(IJunction)) coords = _coordJunctionMap.Keys;
+        else if (typeof(T) == typeof(Junction)) coords = _coordJunctionMap.Where(p => p.Value is Junction).Select(p => p.Key);
+        else if (typeof(T) == typeof(Edge)) coords = _coordJunctionMap.Where(p => p.Value is Edge).Select(p => p.Key);
+        else coords = _coordOtherMap.Where(p => p.Value is T).Select(p => p.Key);
+        if (!sort) return coords.ToArray();
+        return xy 
+            ? coords.OrderBy(c => c.X).ThenBy(c => c.Y).ToArray() 
+            : coords.OrderBy(c => c.Y).ThenBy(c => c.X).ToArray();
     }
 
-    public Vector2I[] GetCellCoords(bool sort = false)
-    {
-        var keys = _coordUnitMap.Where(p => p.Key.X % 2 == 1 && p.Key.Y % 2 == 1).Select(p => p.Key);
-        return sort ? keys.OrderBy(k => k.X).ThenBy(k => k.Y).ToArray() : keys.ToArray();
-    }
+    public Vector2I Size => GetSize();
 
-    public Vector2I[][] GetCellVec2Coords(bool vertical = false)
+    private Vector2I GetSize()
     {
-        var coords = GetCellCoords(true);
-        return vertical
-            ? coords.GroupBy(v => v.X).OrderBy(g => g.Key)
-                .Select(g => g.OrderBy(v => v.Y).ToArray()).ToArray()
-            : coords.GroupBy(v => v.Y).OrderBy(g => g.Key)
-                .Select(g => g.OrderBy(v => v.X).ToArray()).ToArray();
-    }
-
-    public Rect2I GetRect(bool toRowCol = true)
-    {
-        if (!_isDirty) return _cacheRect;
-        var coords = GetCellCoords();
-        var minX = coords.Min(v => v.X);
-        var minY = coords.Min(v => v.Y);
-        var maxX = coords.Max(v => v.X);
-        var maxY = coords.Max(v => v.Y);
-        var width = maxX - minX + 1;
-        var height = maxY - minY + 1;
-        var rect = toRowCol 
-            ? new Rect2I((minX-1)/2, (minY-1)/2, (width+1)/2, (height+1)/2) 
-            : new Rect2I(minX, minY, width, height);
-        if (toRowCol) _cacheRowColRect = rect;
-        else _cacheRect = rect;
-        _isDirty = false;
-        return rect;
+        return _coordOtherMap.LastOrDefault().Key + Vector2I.One;
     }
 }
